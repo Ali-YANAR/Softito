@@ -12,7 +12,7 @@
         .form-grup input { width: 100%; padding: 8px; box-sizing: border-box; }
         button { background-color: #28a745; color: white; border: none; padding: 10px 15px; cursor: pointer; width: 100%; border-radius: 4px; }
         button:hover { background-color: #218838; }
-        #onizleme-resmi { max-width: 150px; display: block; margin-top: 10px; border-radius: 4px; }
+        #onizleme-resmi { max-width: 100%; display: block; margin-top: 10px; border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -49,6 +49,11 @@
         <p><strong>Telefon:</strong> <span id="sonucTelefon">-</span></p>
         <p><strong>Seçilen Resim:</strong></p>
         <img id="onizleme-resmi" src="" alt="Resim seçilmedi" style="display: none;">
+    </div>
+    <div class="sonuc-konteyner">
+        <h1>Kodun Mantığı ve Kritik Noktalar:</h1>
+        <p>1. <strong>event.preventDefault():</strong> Formların varsayılan özelliği butona basıldığında sayfayı yenilemektir. Bu satır o yenilemeyi iptal eder ve JavaScript'imizin kesintisiz çalışmasını sağlar.</p>
+        <p>2. <strong>FileReader():</strong> Bilgisayardan seçilen resmi sunucuya göndermeden, tarayıcının hafızasında geçici bir linke (DataURL) çevirip anında <img> etiketinde göstermemizi sağlar.</p>
     </div>
 
     <!-- JavaScript Kodları -->
