@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Bilgi Gösterici</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; display: flex; gap: 40px; }
+        .form-konteyner, .sonuc-konteyner { border: 1px solid #ccc; padding: 20px; border-radius: 8px; width: 300px; }
+        .form-grup { margin-bottom: 15px; }
+        .form-grup label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-grup input { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { background-color: #28a745; color: white; border: none; padding: 10px 15px; cursor: pointer; width: 100%; border-radius: 4px; }
+        button:hover { background-color: #218838; }
+        #onizleme-resmi { max-width: 100%; display: block; margin-top: 10px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+    <!-- Sol Taraf: Giriş Formu -->
+    <div class="form-konteyner">
+        <h3>Bilgi Formu</h3>
+        <form id="kayitFormu">
+            <div class="form-grup">
+                <label for="ad">Adı:</label>
+                <input type="text" id="ad" required>
+            </div>
+            <div class="form-grup">
+                <label for="soyad">Soyadı:</label>
+                <input type="text" id="soyad" required>
+            </div>
+            <div class="form-grup">
+                <label for="telefon">Telefon:</label>
+                <input type="tel" id="telefon" placeholder="0555 123 4567" required>
+            </div>
+            <div class="form-grup">
+                <label for="resim">Resim Seçin:</label>
+                <input type="file" id="resim" accept="image/*" required>
+            </div>
+            <button type="submit">Ekrana Yazdır</button>
+        </form>
+    </div>
+
+    <!-- Sağ Taraf: Sonuçların Gösterileceği Alan -->
+    <div class="sonuc-konteyner">
+        <h3>Girilen Bilgiler</h3>
+        <p><strong>Adı:</strong> <span id="sonucAd">-</span></p>
+        <p><strong>Soyadı:</strong> <span id="sonucSoyad">-</span></p>
+        <p><strong>Telefon:</strong> <span id="sonucTelefon">-</span></p>
+        <p><strong>Seçilen Resim:</strong></p>
+        <img id="onizleme-resmi" src="" alt="Resim seçilmedi" style="display: none;">
+    </div>
+    <div class="sonuc-konteyner">
+        <h1>Kodun Mantığı ve Kritik Noktalar:</h1>
+        <p>1. <strong>event.preventDefault():</strong> Formların varsayılan özelliği butona basıldığında sayfayı yenilemektir. Bu satır o yenilemeyi iptal eder ve JavaScript'imizin kesintisiz çalışmasını sağlar.</p>
+        <p>2. <strong>FileReader():</strong> Bilgisayardan seçilen resmi sunucuya göndermeden, tarayıcının hafızasında geçici bir linke (DataURL) çevirip anında <img> etiketinde göstermemizi sağlar.</p>
+    </div>
+
+    <!-- JavaScript Kodları -->
+    <script>
+        document.getElementById('kayitFormu').addEventListener('submit', function(event) {
+            // Sayfanın yenilenmesini engelleyen en kritik satır:
+            event.preventDefault();
+
+            // Formdaki metin değerlerini alıyoruz
+            const ad = document.getElementById('ad').value;
+            const soyad = document.getElementById('soyad').value;
+            const telefon = document.getElementById('telefon').value;
+            const resimGirdisi = document.getElementById('resim');
+
+            // Değerleri sağ taraftaki ilgili alanlara yazdırıyoruz
+            document.getElementById('sonucAd').innerText = ad;
+            document.getElementById('sonucSoyad').innerText = soyad;
+            document.getElementById('sonucTelefon').innerText = telefon;
+
+            // Resim dosyasını okuma işlemi
+            const dosya = resimGirdisi.files[0];
+            if (dosya) {
+                const okuyucu = new FileReader();
+                
+                // Resim bilgisayardan tamamen okunduğunda çalışacak fonksiyon
+                okuyucu.onload = function(e) {
+                    const imgElementi = document.getElementById('onizleme-resmi');
+                    imgElementi.src = e.target.result; // Okunan resmi src'ye ekle
+                    imgElementi.style.display = 'block'; // Resmi görünür yap
+                }
+                
+                okuyucu.readAsDataURL(dosya); // Dosyayı oku ve veriye dönüştür
+            }
+        });
+    </script>
+
+</body>
+</html>

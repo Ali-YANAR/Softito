@@ -1,21 +1,54 @@
 <!DOCTYPE html>
-<ahtml lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kayıt Ol</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+<html>
+
 <body>
-    <div class="container">
-        <h2>Kayıt Ol</h2>
-        <form action="register.php" method="POST">
-            <input type="text" name="username" placeholder="Kullanıcı Adı" required>
-            <input type="email" name="email" placeholder="E-posta" required>
-            <input type="password" name="password" placeholder="Şifre" required>
-            <button type="submit">Kayıt Ol</button>
-        </form>
-        <p>Zaten bir hesabınız var mı? <a href="index.html">Giriş Yap</a></p>
-    </div>
+    <h1>Merhaba Sınıf</h1>
+    <button id="change" >Değiştir</button>
+    <p id="yazi">Yazıyı Değiştir</p>
+    <img id="resim1" src="https://egepazarindan.com/wp-content/uploads/2023/10/ispanyol-sofrito-tarifi-1080x675.jpeg" width="200" height="200" />
+    <img id="resim2" src="https://www.google.com/imgres?q=java%20scriprt&imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F9%2F99%2FUnofficial_JavaScript_logo_2.svg&imgrefurl=https%3A%2F%2Ftr.wikipedia.org%2Fwiki%2FJavaScript&docid=XXIiVCEn9GarZM&tbnid=Swa-N3Ndk5oU9M&vet=12ahUKEwi40LCQvO2UAxX-RvEDHUXcGYgQnPAOegQILRAA..i&w=800&h=800&hcb=2&ved=2ahUKEwi40LCQvO2UAxX-RvEDHUXcGYgQnPAOegQILRAA" width="200" height="200"/>
+    <img id="resim3" src="https://www.google.com/imgres?q=java%20scriprt&imgurl=https%3A%2F%2Fwww.infoworld.com%2Fwp-content%2Fuploads%2F2025%2F09%2F2263137-0-59682900-1757000713-shutterstock_1361674454-100939444-orig.jpg%3Fquality%3D50%26strip%3Dall&imgrefurl=https%3A%2F%2Fwww.infoworld.com%2Farticle%2F2263137%2Fwhat-is-javascript-the-full-stack-programming-language.html&docid=1TH2inIvg-LTdM&tbnid=sKMLz3gPQ3CBEM&vet=12ahUKEwi40LCQvO2UAxX-RvEDHUXcGYgQnPAOegQIOhAA..i&w=6016&h=4016&hcb=2&ved=2ahUKEwi40LCQvO2UAxX-RvEDHUXcGYgQnPAOegQIOhAA" width="200" height="200" />
+    <img id="resim4" src="https://www.google.com/imgres?q=java%20scriprt&imgurl=https%3A%2F%2Fyuksekegitim.com%2Fwp-content%2Fuploads%2F2024%2F03%2F1_LyZcwuLWv2FArOumCxobpA.png&imgrefurl=https%3A%2F%2Fyuksekegitim.com%2Fjavascript-nedir-ne-ise%2F&docid=kraMGX_HOWpZAM&tbnid=A4CeeLvAQy9kFM&vet=12ahUKEwi40LCQvO2UAxX-RvEDHUXcGYgQnPAOegUIrgMQAA..i&w=1200&h=675&hcb=2&ved=2ahUKEwi40LCQvO2UAxX-RvEDHUXcGYgQnPAOegUIrgMQAA" width="200" height="200"/>
+    <img id="resim5" src="https://www.google.com/imgres?q=java%20scriprt&imgurl=https%3A%2F%2Fwww.alastyr.com%2Fblog%2Fwp-content%2Fuploads%2F2021%2F04%2FJavascript-framework-nedir.jpg&imgrefurl=https%3A%2F%2Fwww.alastyr.com%2Fblog%2Fjavascript-nedir-javascript-ogrenme%2F&docid=Nsnw2qk-BWZrSM&tbnid=Lqo2IiWL4c7dzM&vet=12ahUKEwi40LCQvO2UAxX-RvEDHUXcGYgQnPAOegUIhwEQAA..i&w=1000&h=420&hcb=2&ved=2ahUKEwi40LCQvO2UAxX-RvEDHUXcGYgQnPAOegUIhwEQAA" width="200" height="200" />
+    
+    
+    <script>
+      
+        const buton= document.getElementById('change');
+        const yazi = document.getElementById('yazi')
+        const resim = document.getElementById('resim1')
+        let tiklamasayisi= 0;
+ 
+        
+        buton.addEventListener('click', function(){
+            tiklamasayisi++;
+            if(tiklamasayisi % 2==0) {
+                yazi.textContent='butona tıklandı 2 4 6 ';
+                
+            }else{
+                    yazi.textContent="2. kez tıklandı 1 3 5" 
+
+               } 
+        });
+
+
+resim.addEventListener('click',(event) => {
+
+}
+function resimgoster(){
+            let gosterimsayisi=0;
+        
+            gosterimsayisi++;
+            if(gosterimsayisi>5) 
+                return;
+            console.log('Resme Tıklandı. resim yuklendi!');
+            document.getElementById('resim').src = document.getElementById('resim').src.textContent+1;
+             
+        });  
+
+// Pass parameters after the millisecond delay
+setTimeout(resimgoster, 3000, "ALi");
+
+    </script>
 </body>
 </html>
