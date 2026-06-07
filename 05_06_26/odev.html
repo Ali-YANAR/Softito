@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Tasarım Rehberi: 4 Yöntem & 4 Ekran Boyutu</title>
+  <style>
+    /* Genel Ayarlar */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f8fafc;
+      color: #1e293b; /* Daha koyu ve net bir yazı rengi */
+      padding: 50px 30px;
+      line-height: 1.7; /* Satır aralığı artırıldı */
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    header h1 {
+      font-size: clamp(2.2rem, 6vw, 3.2rem); /* Başlık büyütüldü */
+      color: #0f172a;
+      margin-bottom: 15px;
+      font-weight: 800;
+    }
+
+    header p {
+      color: #475569;
+      font-size: 1.4rem; /* Alt başlık büyütüldü */
+      font-weight: 500;
+    }
+
+    .bolum-baslik {
+      max-width: 1300px;
+      margin: 60px auto 30px auto;
+      padding-bottom: 15px;
+      border-bottom: 3px solid #cbd5e1;
+      color: #0f172a;
+      font-size: 1.9rem; /* Bölüm başlıkları büyütüldü */
+      font-weight: 700;
+    }
+
+    /* Sunum Kartları Grid Düzeni */
+    .sunum-konteyner {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); /* Minimum kart genişliği artırıldı */
+      gap: 35px; /* Kartlar arası boşluk artırıldı */
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    /* Blok Kart Tasarımı */
+    .kart {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+      padding: 35px; /* Kart içi boşluk artırıldı */
+      border-top: 8px solid #3b82f6; /* Çizgi kalınlaştırıldı */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s;
+    }
+
+    .kart:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Renk Çeşitleri (Teknikler) */
+    .teknik:nth-child(2) { border-top-color: #10b981; }
+    .teknik:nth-child(3) { border-top-color: #f59e0b; }
+    .teknik:nth-child(4) { border-top-color: #8b5cf6; }
+
+    /* Renk Çeşitleri (Ekran Boyutları) */
+    .ekran:nth-child(1) { border-top-color: #ef4444; }
+    .ekran:nth-child(2) { border-top-color: #06b6d4; }
+    .ekran:nth-child(3) { border-top-color: #ec4899; }
+    .ekran:nth-child(4) { border-top-color: #14b8a6; }
+
+    .kart-ust {
+      margin-bottom: 25px;
+    }
+
+    .kart-baslik {
+      font-size: 1.55rem; /* Kart başlıkları büyütüldü */
+      color: #0f172a;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+    }
+
+    .kart-numara {
+      background: #e2e8f0;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 1rem; /* Numaralar büyütüldü */
+      font-weight: bold;
+      color: #334155;
+    }
+
+    .kart-aciklama {
+      color: #334155;
+      font-size: 1.15rem; /* Açıklama metinleri büyütüldü */
+      font-weight: 400;
+    }
+
+    /* Kod Gösterim Alanı */
+    .kod-alani {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 20px; /* Kod kutusu içi genişletildi */
+      border-radius: 10px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 1.05rem; /* Kod fontu belirgin şekilde büyütüldü */
+      line-height: 1.6;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      font-weight: 500;
+    }
+
+    /* Kod Renklendirme */
+    .kod-alani span.yorum { color: #6a9955; }
+    .kod-alani span.secici { color: #d7ba7d; font-weight: bold; }
+    .kod-alani span.ozellik { color: #9cdcfe; }
+    .kod-alani span.deger { color: #ce9178; }
+
+    /* Mobil Uyumluluk */
+    @media screen and (max-width: 600px) {
+      body { padding: 25px 15px; }
+      .sunum-konteyner { gap: 20px; }
+      header h1 { font-size: 2rem; }
+      header p { font-size: 1.2rem; }
+      .bolum-baslik { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Responsive Tasarımın Temelleri</h1>
+    <p>Web dünyasında duyarlı tasarım geliştirmek için kullanılan 4 teknik ve 4 standart kesme noktası</p>
+  </header>
+
+  <!-- BÖLÜM 1: 4 TEMEL TEKNİK -->
+  <h2 class="bolum-baslik">A) Responsive Tasarımın 4 Temel Yolu (Teknikler)</h2>
+  
+  <main class="sunum-konteyner">
+
+    <section class="kart teknik">
+      <div class="kart-ust">
+        <div class="kart-baslik">
+          <span class="kart-numara">Teknik 01</span>
+          <h3>Esnek Izgaralar (Fluid Grids)</h3>
+        </div>
+        <p class="kart-aciklama">Sabit genişlikler yerine yüzdelik ve dinamik kutu modelleri kullanarak sayfa düzenini esnek hale getirir.</p>
+      </div>
+      <pre class="kod-alani"><span class="secici">.kapsayici</span> {
+  <span class="ozellik">display</span>: <span class="deger">grid</span>;
+  <span class="ozellik">grid-template-columns</span>: 
+    <span class="deger">repeat(auto-fit, minmax(250px, 1fr))</span>;
+}</pre>
+    </section>
+
+    <section class="kart teknik">
+      <div class="kart-ust">
+        <div class="kart-baslik">
+          <span class="kart-numara">Teknik 02</span>
+          <h3>Medya Sorguları (Media Queries)</h3>
+        </div>
+        <p class="kart-aciklama">CSS'in tarayıcı veya cihaz özelliklerini inceleyerek sadece hedeflenen ekrana göre kod çalıştırmasını sağlar.</p>
+      </div>
+      <pre class="kod-alani"><span class="secici">@media</span> (max-width: 768px) {
+  <span class="secici">.nav-menu</span> {
+    <span class="ozellik">display</span>: <span class="deger">block</span>; <span class="yorum">/* Dikey hizalama */</span>
+  }
+}</pre>
+    </section>
+
+    <section class="kart teknik">
+      <div class="kart-ust">
+        <div class="kart-baslik">
+          <span class="kart-numara">Teknik 03</span>
+          <h3>Esnek Görseller (Fluid Images)</h3>
+        </div>
+        <p class="kart-aciklama">Görsellerin ve videoların ekran boyutunu aşarak taşmasını veya kalitesinin bozulmasını engeller.</p>
+      </div>
+      <pre class="kod-alani"><span class="secici">img, video</span> {
+  <span class="ozellik">max-width</span>: <span class="deger">100%</span>;
+  <span class="ozellik">height</span>: <span class="deger">auto</span>;
+}</pre>
+    </section>
+
+    <section class="kart teknik">
+      <div class="kart-ust">
+        <div class="kart-baslik">
+          <span class="kart-numara">Teknik 04</span>
+          <h3>Esnek Tipografi (Typography)</h3>
+        </div>
+        <p class="kart-aciklama">Metin boyutlarının sabit kalmayıp ekran büyüklüğüne göre otomatik ölçeklenmesini sağlar.</p>
+      </div>
+      <pre class="kod-alani"><span class="secici">h1</span> {
+  <span class="ozellik">font-size</span>: <span class="deger">clamp(1.5rem, 4vw, 3rem)</span>;
+}</pre>
+    </section>
+
+  </main>
+
+  <!-- BÖLÜM 2: 4 ANA EKRAN BOYUTU -->
+  <h2 class="bolum-baslik">B) Standart Kabul Edilen 4 Cihaz Ölçüsü (Breakpoints)</h2>
+
+  <div class="sunum-konteyner">
+
+    <section class="kart ekran">
+      <div class="kart-ust">
+        <div class="kart-baslik">
+          <span class="kart-numara">Boyut 01</span>
+          <h3>Mobil Ekranlar</h3>
+        </div>
+        <p class="kart-aciklama">Akıllı telefonlar için kullanılan ve genellikle dikey yönü hedefleyen en küçük ekran aralığıdır.</p>
+      </div>
+      <pre class="kod-alani"><span class="yorum">/* 0px - 767px arası cihazlar */</span>
+<span class="secici">@media</span> (max-width: 767px) {
+  <span class="secici">body</span> { <span class="ozellik">font-size</span>: <span class="deger">14px</span>; }
+}</pre>
+    </section>
+
+    <section class="kart ekran">
+      <div class="kart-ust">
+        <div class="kart-baslik">
+          <span class="kart-numara">Boyut 02</span>
+          <h3>Tablet Ekranlar</h3>
+        </div>
+        <p class="kart-aciklama">Büyük ekranlı telefonlar ile standart tablet boyutlarını kapsayan geçiş aşamasıdır.</p>
+      </div>
+      <pre class="kod-alani"><span class="yorum">/* 768px - 991px arası cihazlar */</span>
+<span class="secici">@media</span> (min-width: 768px) {
+  <span class="secici">.kolon</span> { <span class="ozellik">width</span>: <span class="deger">50%</span>; }
+}</pre>
+    </section>
+
+    <section class="kart ekran">
+      <div class="kart-ust">
+        <div class="kart-baslik">
+          <span class="kart-numara">Boyut 03</span>
+          <h3>Masaüstü / Laptop</h3>
+        </div>
+        <p class="kart-aciklama">Standart dizüstü bilgisayarlar ve küçük monitörler için uygulanan yerleşim planıdır.</p>
+      </div>
+      <pre class="kod-alani"><span class="yorum">/* 992px - 1199px arası cihazlar */</span>
+<span class="secici">@media</span> (min-width: 992px) {
+  <span class="secici">.kolon</span> { <span class="ozellik">width</span>: <span class="deger">33.3%</span>; }
+}</pre>
+    </section>
+
+    <section class="kart ekran">
+      <div class="kart-ust">
+        <div class="kart-baslik">
+          <span class="kart-numara">Boyut 04</span>
+          <h3>Geniş Ekranlar</h3>
+        </div>
+        <p class="kart-aciklama">Büyük masaüstü monitörler ve yüksek çözünürlüklü televizyon panelleri için geçerlidir.</p>
+      </div>
+      <pre class="kod-alani"><span class="yorum">/* 1200px ve üzeri cihazlar */</span>
+<span class="secici">@media</span> (min-width: 1200px) {
+  <span class="secici">.kapsayici</span> { <span class="ozellik">max-width</span>: <span class="deger">1140px</span>; }
+}</pre>
+    </section>
+
+  </div>
+
+</body>
+</html>

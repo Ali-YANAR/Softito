@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SleekTrade - Giriş Paneli</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #0b0e14; color: #ffffff; display: flex; height: 100vh; overflow: hidden; }
+
+        /* Sol Taraf - Görsel ve Anlamlı Karşılama Alanı */
+        .sol-panel { flex: 1.2; background: linear-gradient(135deg, #161a25 0%, #0b0e14 100%); display: flex; flex-direction: column; justify-content: center; padding: 60px; position: relative; border-right: 1px solid #1f2635; }
+        .sol-panel::before { content: ''; position: absolute; top: 20%; left: 10%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(2, 192, 118, 0.15) 0%, transparent 70%); filter: blur(30px); }
+        .sol-panel::after { content: ''; position: absolute; bottom: 15%; right: 10%; width: 250px; height: 250px; background: radial-gradient(circle, rgba(246, 70, 93, 0.1) 0%, transparent 70%); filter: blur(40px); }
+        .logo { font-size: 24px; font-weight: bold; color: #02c076; margin-bottom: 40px; display: flex; align-items: center; gap: 8px; z-index: 2; }
+        .logo span { color: #fff; }
+        .motto { font-size: 42px; font-weight: 800; line-height: 1.2; margin-bottom: 20px; z-index: 2; background: linear-gradient(to right, #ffffff, #848e9c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .acıklama { color: #848e9c; font-size: 16px; max-width: 460px; line-height: 1.6; z-index: 2; }
+
+        /* Sağ Taraf - Giriş Formu Alanı */
+        .sag-panel { flex: 1; display: flex; justify-content: center; align-items: center; padding: 40px; background-color: #0b0e14; }
+        .form-konteyner { width: 100%; max-width: 380px; }
+        .form-baslik { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+        .form-alt-baslik { color: #848e9c; font-size: 14px; margin-bottom: 30px; }
+        .grup { margin-bottom: 20px; }
+        .grup label { display: block; font-size: 13px; color: #848e9c; margin-bottom: 8px; font-weight: 500; }
+        .grup input { width: 100%; padding: 14px 16px; background-color: #1e232f; border: 1px solid #2b313f; border-radius: 8px; color: white; font-size: 15px; transition: all 0.3s ease; }
+        .grup input:focus { outline: none; border-color: #02c076; box-shadow: 0 0 0 1px #02c076; }
+        
+        /* Buton Tasarımı */
+        .btn-giris { width: 100%; padding: 15px; background-color: #02c076; color: #0b0e14; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; transition: background-color 0.2s ease, transform 0.1s ease; margin-top: 10px; }
+        .btn-giris:hover { background-color: #03d381; }
+        .btn-giris:active { transform: scale(0.98); }
+
+        /* Sonradan Açılacak Simüle Trade Paneli */
+        #trade-paneli { display: none; width: 100vw; height: 100vh; background-color: #0b0e14; padding: 40px; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .success-icon { font-size: 64px; color: #02c076; margin-bottom: 20px; animation: pop 0.4s ease; }
+        @keyframes pop { 0% { transform: scale(0.5); } 100% { transform: scale(1); } }
+    </style>
+</head>
+<body>
+
+    <!-- GİRİŞ EKRANI (Ana Yapı) -->
+    <div id="giris-ekrani" style="display: flex; width: 100%; height: 100%;">
+        <!-- Sol Görsel Panel -->
+        <div class="sol-panel">
+            <div class="logo">📊 Auto<span>Trade</span></div>
+            <h1 class="motto">Geleceğin Finans <br>Dünyasına Adım Atın.</h1>
+            <p class="acıklama">Yapay zeka destekli analizler, milisaniyelik emir iletim hızı ve minimalist arayüz ile yatırımlarınızı tek bir noktadan profesyonelce yönetin.</p>
+        </div>
+
+        <!-- Sağ Form Panel -->
+        <div class="sag-panel">
+            <div class="form-konteyner">
+                <h2 class="form-baslik">Hesabınıza Giriş Yapın</h2>
+                <p class="form-alt-baslik">İşlem odasına bağlanmak için bilgilerinizi girin.</p>
+                
+                <form id="loginForm">
+                    <div class="grup">
+                        <label for="email">E-posta Adresi</label>
+                        <input type="email" id="email" placeholder="isim@ornek.com" required>
+                    </div>
+                    <div class="grup">
+                        <label for="sifre">Şifre</label>
+                        <input type="password" id="sifre" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn-giris">Giriş Yap ve İşleme Başla</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEDEF TRADE PANELİ (Giriş yaptıktan sonra açılacak olan kısım) -->
+    <div id="trade-paneli">
+        <div class="success-icon">✓</div>
+        <h1 style="font-size: 36px; margin-bottom: 10px;">İşlem Odasına Hoş Geldiniz!</h1>
+        <p style="color: #848e9c; font-size: 16px; max-width: 500px; line-height: 1.6;">
+            Başarıyla login oldunuz. Şu an canlı trading paneline (Simülasyon) bağlandınız. Grafik yükleniyor...
+        </p>
+    </div>
+
+    <!-- JavaScript Geçiş Mantığı -->
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            // Sayfa yenilenmesini engelliyoruz
+            event.preventDefault();
+
+            // Kullanıcı girdilerini kontrol edebiliriz (Örn: email ve şifre alındı)
+            const email = document.getElementById('email').value;
+            const sifre = document.getElementById('sifre').value;
+
+            if(email && sifre) {
+                // 1. Giriş ekranını tamamen gizle
+                document.getElementById('giris-ekrani').style.display = 'none';
+                
+                // 2. Trade panelini görünür yap ve düzenini flex olarak ayarla
+                const tradePaneli = document.getElementById('trade-paneli');
+                tradePaneli.style.display = 'flex';
+            }
+        });
+    </script>
+
+</body>
+</html>
