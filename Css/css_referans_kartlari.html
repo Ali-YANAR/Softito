@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS Özellikleri Referans Rehberi</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8fafc; color: #1e293b; padding: 40px 30px; }
+  
+  h1 { font-size: 2rem; font-weight: 800; color: #0f172a; margin-bottom: 6px; }
+  .subtitle { font-size: 1rem; color: #64748b; margin-bottom: 40px; }
+
+  .sec { margin-bottom: 36px; }
+  .sec-title {
+    font-size: 0.72rem; font-weight: 700; color: #94a3b8;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 14px; padding-bottom: 8px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+  }
+  .card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    border-left: 4px solid #e2e8f0;
+  }
+  .card.layout   { border-left-color: #3b82f6; }
+  .card.text     { border-left-color: #8b5cf6; }
+  .card.border-c { border-left-color: #10b981; }
+  .card.interact { border-left-color: #f59e0b; }
+  .card.resp     { border-left-color: #ef4444; }
+  .card.other    { border-left-color: #64748b; }
+
+  .prop { font-family: 'Courier New', monospace; font-size: 15px; font-weight: 700; color: #1e293b; }
+  .desc { font-size: 14px; color: #475569; line-height: 1.6; }
+  .val  {
+    font-size: 13px; color: #475569;
+    background: #f1f5f9;
+    border-radius: 6px;
+    padding: 8px 12px;
+    line-height: 1.7;
+    margin-top: 2px;
+  }
+  .val code { font-family: 'Courier New', monospace; font-size: 12px; color: #2563eb; }
+
+  footer { margin-top: 40px; text-align: center; font-size: 12px; color: #94a3b8; border-top: 1px solid #e2e8f0; padding-top: 20px; }
+
+  @media (max-width: 600px) {
+    .cards { grid-template-columns: 1fr; }
+    body { padding: 20px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<h1>CSS Özellikleri Referans Rehberi</h1>
+<p class="subtitle">Tüm dosyalardan derlenen benzersiz CSS özellikleri — açıklamalı ve değerleriyle</p>
+
+<!-- KUTU MODELİ -->
+<div class="sec">
+<div class="sec-title">Kutu Modeli</div>
+<div class="cards">
+  <div class="card layout">
+    <div class="prop">margin</div>
+    <div class="desc">Elemanın dış boşluğunu ayarlar — çevre elemanlarla mesafe.</div>
+    <div class="val">Kullanılan: <code>0, 30px, 20px, 8px, 40px</code><br>Varsayılan: <code>0</code> — negatif değer alabilir</div>
+  </div>
+  <div class="card layout">
+    <div class="prop">padding</div>
+    <div class="desc">Elemanın iç boşluğunu ayarlar — içerik ile kenarlık arasındaki mesafe.</div>
+    <div class="val">Kullanılan: <code>8px, 14px 16px, 20px, 60px</code><br>Varsayılan: <code>0</code></div>
+  </div>
+  <div class="card layout">
+    <div class="prop">box-sizing</div>
+    <div class="desc">Genişlik/yükseklik hesabına padding ve border'ın dahil edilip edilmeyeceğini belirler.</div>
+    <div class="val">Kullanılan: <code>border-box</code><br>Varsayılan: <code>content-box</code></div>
+  </div>
+  <div class="card layout">
+    <div class="prop">width</div>
+    <div class="desc">Elemanın yatay genişliğini belirler.</div>
+    <div class="val">Kullanılan: <code>100%, 300px, 380px</code><br>Varsayılan: <code>auto</code></div>
+  </div>
+  <div class="card layout">
+    <div class="prop">max-width</div>
+    <div class="desc">Elemanın alabileceği en fazla genişliği sınırlar.</div>
+    <div class="val">Kullanılan: <code>100%, 380px, 460px, 1400px</code><br>Varsayılan: <code>none</code> (sınırsız)</div>
+  </div>
+  <div class="card layout">
+    <div class="prop">min-height</div>
+    <div class="desc">Elemanın alabileceği en küçük yüksekliği belirler.</div>
+    <div class="val">Kullanılan: <code>100vh</code><br>Varsayılan: <code>auto</code> (0 kabul edilir)</div>
+  </div>
+  <div class="card layout">
+    <div class="prop">height</div>
+    <div class="desc">Elemanın dikey yüksekliğini belirler.</div>
+    <div class="val">Kullanılan: <code>100%, 100vh, 300px</code><br>Varsayılan: <code>auto</code></div>
+  </div>
+</div>
+</div>
+
+<!-- YERLEŞİM -->
+<div class="sec">
+<div class="sec-title">Yerleşim (Layout)</div>
+<div class="cards">
+  <div class="card layout">
+    <div class="prop">display</div>
+    <div class="desc">Elemanın görüntülenme modelini belirler — blok, satır içi, flex, grid gibi.</div>
+    <div class="val">Kullanılan: <code>flex, grid, block, none</code><br>Varsayılan: etikete göre değişir</div>
+  </div>
+  <div class="card layout">
+    <div class="prop">flex</div>
+    <div class="desc">Flex öğesinin büyüme, küçülme ve temel boyutunu tek satırda tanımlar.</div>
+    <div class="val">Kullanılan: <code>1, 1.2</code><br>Varsayılan: <code>0 1 auto</code></div>
+  </div>
+  <div class="card layout">
+    <div class="prop">flex-direction</div>
+    <div class="desc">Flex öğelerinin dizilme yönünü belirler — yatay veya dikey.</div>
+    <div class="val">Kullanılan: <code>row, column</code><br>Varsayılan: <code>row</code></div>
+  </div>
+  <div class="card layout">
+    <div class="prop">flex-wrap</div>
+    <div class="desc">Flex öğeleri sığmadığında alt satıra geçip geçmeyeceğini belirler.</div>
+    <div class="val">Kullanılan: <code>wrap</code><br>Varsayılan: <code>nowrap</code></div>
+  </div>
+  <div class="card layout">
+    <div class="prop">flex-shrink</div>
+    <div class="desc">Flex öğesinin konteynır daraldığında küçülmesini engeller.</div>
+    <div class="val">Kullanılan: <code>shrink-0</code> → <code>flex-shrink: 0</code><br>Varsayılan: <code>1</code></div>
+  </div>
+  <div class="card layout">
+    <div class="prop">justify-content</div>
+    <div class="desc">Flex/grid öğelerini ana eksen üzerinde hizalar.</div>
+    <div class="val">Kullanılan: <code>center, space-between</code><br>Varsayılan: <code>flex-start</code></div>
+  </div>
+  <div class="card layout">
+    <div class="prop">align-items</div>
+    <div class="desc">Flex/grid öğelerini çapraz eksen üzerinde hizalar.</div>
+    <div class="val">Kullanılan: <code>center, stretch, start</code><br>Varsayılan: <code>stretch</code></div>
+  </div>
+  <div class="card layout">
+    <div class="prop">gap</div>
+    <div class="desc">Grid veya flex öğeleri arasındaki boşluğu ayarlar.</div>
+    <div class="val">Kullanılan: <code>8px, 12px, 16px, 30px, 40px</code><br>Varsayılan: <code>0</code></div>
+  </div>
+  <div class="card layout">
+    <div class="prop">order</div>
+    <div class="desc">Flex öğesinin kaynak sırasından bağımsız olarak görsel sırasını değiştirir.</div>
+    <div class="val">Kullanılan: <code>order-first</code> → <code>order: -9999</code><br>Varsayılan: <code>0</code></div>
+  </div>
+  <div class="card layout">
+    <div class="prop">grid-template-columns</div>
+    <div class="desc">Grid düzeninde sütunların genişliklerini ve sayısını tanımlar.</div>
+    <div class="val">Kullanılan: <code>repeat(auto-fit, minmax(340px, 1fr))</code><br>Varsayılan: <code>none</code></div>
+  </div>
+  <div class="card layout">
+    <div class="prop">position</div>
+    <div class="desc">Elemanın konumlandırma yöntemini belirler.</div>
+    <div class="val">Kullanılan: <code>static, relative, absolute, fixed, sticky</code><br>Varsayılan: <code>static</code></div>
+  </div>
+  <div class="card layout">
+    <div class="prop">top / left / right / bottom</div>
+    <div class="desc">Konumlandırılmış öğenin kenar uzaklıklarını ayarlar.</div>
+    <div class="val">Kullanılan: <code>20%, 15%, 10%</code><br>Varsayılan: <code>auto</code></div>
+  </div>
+  <div class="card layout">
+    <div class="prop">z-index</div>
+    <div class="desc">Üst üste gelen öğelerin öncelik sırasını belirler — büyük değer öndedir.</div>
+    <div class="val">Kullanılan: <code>2, 10, 20</code><br>Varsayılan: <code>auto</code></div>
+  </div>
+  <div class="card layout">
+    <div class="prop">overflow</div>
+    <div class="desc">İçeriğin taşması durumunda ne yapılacağını belirler.</div>
+    <div class="val">Kullanılan: <code>hidden, auto</code><br>Varsayılan: <code>visible</code></div>
+  </div>
+</div>
+</div>
+
+<!-- RENK & ARKA PLAN -->
+<div class="sec">
+<div class="sec-title">Renk & Arka Plan</div>
+<div class="cards">
+  <div class="card other">
+    <div class="prop">background-color</div>
+    <div class="desc">Elemanın arka plan rengini düz renk olarak ayarlar.</div>
+    <div class="val">Kullanılan: <code>#28a745, #0b0e14, #02c076, #f8fafc</code><br>Varsayılan: <code>transparent</code></div>
+  </div>
+  <div class="card other">
+    <div class="prop">background (degrade)</div>
+    <div class="desc">Arka plan için kısayol; renk, degrade veya resim tanımlar.</div>
+    <div class="val">Kullanılan: <code>linear-gradient(135deg,...)</code><br><code>radial-gradient(circle,...)</code><br>Varsayılan: <code>transparent</code></div>
+  </div>
+  <div class="card other">
+    <div class="prop">color</div>
+    <div class="desc">Metnin ön plan (yazı) rengini belirler.</div>
+    <div class="val">Kullanılan: <code>white, #848e9c, #0f172a, #64748b</code><br>Varsayılan: tarayıcı teması (siyah)</div>
+  </div>
+</div>
+</div>
+
+<!-- YAZI TİPİ & METİN -->
+<div class="sec">
+<div class="sec-title">Yazı Tipi & Metin</div>
+<div class="cards">
+  <div class="card text">
+    <div class="prop">font-family</div>
+    <div class="desc">Kullanılacak yazı tipi ailesini belirler.</div>
+    <div class="val">Kullanılan: <code>Arial, 'Segoe UI', Consolas, monospace</code><br>Varsayılan: tarayıcı fontu</div>
+  </div>
+  <div class="card text">
+    <div class="prop">font-size</div>
+    <div class="desc">Metnin boyutunu ayarlar. Tailwind skalası veya doğrudan değer kullanılabilir.</div>
+    <div class="val">Kullanılan: <code>text-xs (0.75rem) → text-2xl (1.5rem)</code><br>Özel: <code>[8px], [10px]</code> — Varsayılan: <code>1rem</code></div>
+  </div>
+  <div class="card text">
+    <div class="prop">font-size: clamp()</div>
+    <div class="desc">Min, ideal ve max boyutu viewport genişliğine göre akıcı ölçekler.</div>
+    <div class="val">Kullanılan: <code>clamp(2.2rem, 6vw, 3.2rem)</code><br>Sözdizimi: <code>clamp(min, tercih, max)</code></div>
+  </div>
+  <div class="card text">
+    <div class="prop">font-weight</div>
+    <div class="desc">Metnin kalınlığını belirler.</div>
+    <div class="val">400 = normal, 700 = bold, 800 = extrabold, 900 = black<br>Varsayılan: <code>400</code></div>
+  </div>
+  <div class="card text">
+    <div class="prop">line-height</div>
+    <div class="desc">Satırlar arası dikey boşluğu ayarlar.</div>
+    <div class="val">Kullanılan: <code>1.2, 1.6, 1.7</code><br>Tailwind: <code>leading-tight(1.25) → leading-loose(2)</code><br>Varsayılan: <code>normal (≈1.2)</code></div>
+  </div>
+  <div class="card text">
+    <div class="prop">letter-spacing (tracking)</div>
+    <div class="desc">Harfler arasındaki yatay mesafeyi ayarlar. Tailwind'de "tracking" adıyla kullanılır.</div>
+    <div class="val">
+      <code>tracking-tighter: -0.05em</code><br>
+      <code>tracking-tight: -0.03em</code><br>
+      <code>tracking-normal: 0em</code><br>
+      <code>tracking-wide: 0.05em</code><br>
+      <code>tracking-wider: 0.1em</code><br>
+      <code>tracking-widest: 0.25em</code><br>
+      Varsayılan: <code>normal (0)</code>
+    </div>
+  </div>
+  <div class="card text">
+    <div class="prop">text-transform</div>
+    <div class="desc">Metnin büyük/küçük harf dönüşümünü belirler; etiket ve rozetlerde sık kullanılır.</div>
+    <div class="val">Kullanılan: <code>uppercase</code><br>Seçenekler: <code>uppercase, lowercase, capitalize, none</code></div>
+  </div>
+  <div class="card text">
+    <div class="prop">text-align</div>
+    <div class="desc">Metnin yatay hizalamasını belirler.</div>
+    <div class="val">Kullanılan: <code>center, left</code><br>Varsayılan: <code>left</code></div>
+  </div>
+  <div class="card text">
+    <div class="prop">white-space</div>
+    <div class="desc">Boşluk ve satır kırma davranışını kontrol eder; kod blokları için kullanılır.</div>
+    <div class="val">Kullanılan: <code>pre-wrap</code><br>Varsayılan: <code>normal</code></div>
+  </div>
+</div>
+</div>
+
+<!-- KENARLIK & KÖŞE -->
+<div class="sec">
+<div class="sec-title">Kenarlık & Köşe</div>
+<div class="cards">
+  <div class="card border-c">
+    <div class="prop">border</div>
+    <div class="desc">Kenarlık kalınlığını, stilini ve rengini kısayol ile tanımlar.</div>
+    <div class="val">Kullanılan: <code>1px solid #ccc, none</code><br>Varsayılan: <code>medium none currentColor</code></div>
+  </div>
+  <div class="card border-c">
+    <div class="prop">border-top / right / bottom</div>
+    <div class="desc">Yalnızca belirtilen kenara kenarlık uygular.</div>
+    <div class="val">Kullanılan: <code>border-top: 6px solid #3b82f6</code><br><code>border-bottom: 3px solid #cbd5e1</code></div>
+  </div>
+  <div class="card border-c">
+    <div class="prop">border-radius</div>
+    <div class="desc">Köşeleri yuvarlar. Tailwind skalası: rounded-sm → rounded-full.</div>
+    <div class="val">Kullanılan: <code>4px, 8px, 12px, 16px</code><br><code>rounded-full = 9999px</code><br>Varsayılan: <code>0</code></div>
+  </div>
+  <div class="card border-c">
+    <div class="prop">box-shadow</div>
+    <div class="desc">Elemana gölge veya dış çerçeve ekler.</div>
+    <div class="val">Manuel: <code>0 4px 6px rgba(0,0,0,0.05)</code><br>Tailwind: <code>shadow-sm, shadow-md, shadow-lg</code><br>Varsayılan: <code>none</code></div>
+  </div>
+  <div class="card border-c">
+    <div class="prop">border-collapse</div>
+    <div class="desc">Tablo kenarlıklarının birleşip birleşmeyeceğini belirler.</div>
+    <div class="val">Kullanılan: <code>collapse</code><br>Varsayılan: <code>separate</code></div>
+  </div>
+  <div class="card border-c">
+    <div class="prop">outline</div>
+    <div class="desc">Elemanın dışına layout'u etkilemeden çizgi çizer; focus için kullanılır.</div>
+    <div class="val">Kullanılan: <code>none</code> (kaldırıldı)<br>Varsayılan: tarayıcı tanımlı</div>
+  </div>
+</div>
+</div>
+
+<!-- ETKİLEŞİM & ANİMASYON -->
+<div class="sec">
+<div class="sec-title">Etkileşim & Animasyon</div>
+<div class="cards">
+  <div class="card interact">
+    <div class="prop">cursor</div>
+    <div class="desc">Fare imlecinin şeklini belirler.</div>
+    <div class="val">Kullanılan: <code>pointer</code><br>Varsayılan: <code>auto</code></div>
+  </div>
+  <div class="card interact">
+    <div class="prop">transition</div>
+    <div class="desc">Özellik değişimlerini belirtilen süre ve hızlanma eğrisiyle canlandırır.</div>
+    <div class="val">Kullanılan: <code>all 0.3s ease</code><br><code>background-color 0.2s ease</code><br>Tailwind: <code>transition-colors duration-300</code></div>
+  </div>
+  <div class="card interact">
+    <div class="prop">transform</div>
+    <div class="desc">Döndürme, ölçekleme, taşıma gibi 2D/3D dönüşümler uygular.</div>
+    <div class="val">Kullanılan: <code>scale(0.98), translateY(-5px)</code><br>Varsayılan: <code>none</code></div>
+  </div>
+  <div class="card interact">
+    <div class="prop">animation / @keyframes</div>
+    <div class="desc">Tanımlanmış animasyonu bir elemana bağlar ve çalıştırır.</div>
+    <div class="val">Kullanılan: <code>pop 0.4s ease</code><br>@keyframes ile birlikte kullanılır<br>Varsayılan: <code>none</code></div>
+  </div>
+</div>
+</div>
+
+<!-- RESPONSIVE -->
+<div class="sec">
+<div class="sec-title">Responsive</div>
+<div class="cards">
+  <div class="card resp">
+    <div class="prop">@media screen</div>
+    <div class="desc">Belirli ekran genişliklerinde farklı CSS kuralları uygulamak için medya sorgusu tanımlar.</div>
+    <div class="val">
+      <code>max-width: 600px</code> → mobil<br>
+      <code>min-width: 768px</code> → tablet<br>
+      <code>min-width: 992px</code> → masaüstü<br>
+      <code>min-width: 1200px</code> → geniş ekran
+    </div>
+  </div>
+  <div class="card resp">
+    <div class="prop">Tailwind breakpoint öneki</div>
+    <div class="desc">Belirli ekran genişliğinin üstünde CSS sınıfını aktive eder.</div>
+    <div class="val">Kullanılan: <code>hidden md:flex, md:hidden</code><br><code>sm:grid-cols-2, md:grid-cols-3</code><br>sm≥640px, md≥768px, lg≥1024px</div>
+  </div>
+</div>
+</div>
+
+<!-- DİĞER -->
+<div class="sec">
+<div class="sec-title">Diğer</div>
+<div class="cards">
+  <div class="card other">
+    <div class="prop">filter</div>
+    <div class="desc">Elemana grafik filtreler uygular — bulanıklaştırma gibi.</div>
+    <div class="val">Kullanılan: <code>blur(30px), blur(40px)</code><br>Varsayılan: <code>none</code></div>
+  </div>
+  <div class="card other">
+    <div class="prop">content</div>
+    <div class="desc">::before / ::after pseudo-öğelerine içerik ekler.</div>
+    <div class="val">Kullanılan: <code>''</code> (boş string)<br>Pseudo-öğe için zorunludur</div>
+  </div>
+  <div class="card other">
+    <div class="prop">-webkit-background-clip</div>
+    <div class="desc">Arka planın hangi alana uygulanacağını belirler; degrade metin efekti için kullanılır.</div>
+    <div class="val">Kullanılan: <code>text</code><br>Varsayılan: <code>border-box</code></div>
+  </div>
+  <div class="card other">
+    <div class="prop">list-style-type</div>
+    <div class="desc">Sırasız listelerdeki madde işareti simgesini belirler.</div>
+    <div class="val">Kullanılan: <code>none</code><br>Varsayılan: <code>disc</code></div>
+  </div>
+  <div class="card other">
+    <div class="prop">overflow-x: auto</div>
+    <div class="desc">Yatay taşma olduğunda kaydırma çubuğu gösterir.</div>
+    <div class="val">Kullanılan: <code>auto</code><br>Varsayılan: <code>visible</code></div>
+  </div>
+  <div class="card other">
+    <div class="prop">table-auto</div>
+    <div class="desc">Tablo sütun genişliklerini içeriğe göre otomatik hesaplar.</div>
+    <div class="val">Kullanılan: <code>table-auto</code><br>Alternatif: <code>table-fixed</code></div>
+  </div>
+</div>
+</div>
+
+<footer>CSS Özellikleri Referans Rehberi &mdash; Tüm dosyalardan derlendi</footer>
+</body>
+</html>

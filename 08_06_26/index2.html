@@ -2,46 +2,65 @@
 <html lang="en">
 
 <head>
+    <!-- Türkçe harf desteği için gerekli olan crakter seti -->
     <meta charset="UTF-8" />
+        <!-- Responsive tasarım için kullanılan cihazın ekran genişliğini alıyor -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Sayfa Başlığı Header kısmında bulunan -->
+
     <title>Document</title>
+        <!-- tailwindcss için gerekli kütüphaneleri getiren link -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.css" />
 </head>
+    <!-- browser larda görüntülenen ekran
+    bg-indigo-50: => arka plan rengimiz indigo açık mavimsi bir renk. gövdedeki yazı renklerini hafif koyu gri yaparak okunabilirliği artırıyoruz. 
+    
+    text-gray-800: => ile metin rengini koyu gri yapıyoruz.
+    font-sans: => ile sans-serif bir yazı tipi kullanıyoruz. 
+    min-h-screen: => ile ekranın minimum yüksekliğini sağlıyoruz.
+    p-8: =>ile iç boşluk ekliyoruz. 
+
+    flex: => Elementi esnek bir kutu (flexbox) modeline dönüştürür. İçindeki öğeleri hizalamayı kolaylaştırır. 
+    flex-col: => Esnek kutu içindeki ögeleri yukarıdan aşağıya doğru, dikey bir sütun halinde sıralar. 
+    items-center: => Esnek kutu içindeki öğeleri yatay olarak ortalar.
+    justify-center: => İçerideki tüm ögeleri dikey eksende tam ortalar.
+    gap-6: => Esnek kutu içindeki öğeler arasında 1.5rem (24px) boşluk bırakır. 
+    -->
 
 <body class="bg-indigo-50 text-gray-800 font-sans min-h-screen p-8 flex flex-col items-center justify-center gap-6">
     <div class="text-center max-w-md">
         <div>
-            <h2 class="text-xl font-bold text-gray-900 mb-2">
+            <h1 class="text-xl font-bold text-gray-900 mb-2">
                 Fiyatkandırma kartı felex column
-            </h2>
+            </h1>
             <p class="text-xs text-gray-500">
                 Kart elemanları üst üste sıralamak için flex-col, öne çıkan rozeti en
                 üstte göstermek için ise order-first sınıfı
             </p>
         </div>
-   
-            <div class="w-full max-w-xs bg-white border border-gray-200 rounded-2xl p-6 flex flex-col gap-4 shadow-sm">
-                <div>
-                    <h2 class="text-sm font-bold text-gray-800 uppercase tracking-wider">
-                        Standart Paket
-                    </h2>
-                    <p class="text-2xl font-extrabold text-gray-900 mt-1">99 TL / Ay</p>
-                </div>
-                <div
-                    class="px-2.5 py-1 bg-indig-100 border border-indigo-200 text-[9px] font-extrabold rounded-full self-start order-first uppercase tracking-wider">
-                    En popüler paket (order-first)
-                </div>
-                <div class="text-xs text-gray-500 space-y-2 border border-gray-100 pt-4">
-                    <p>1 Sınırsız Proje</p>
-                    <p>25 tane kişisel proje</p>
-                    <p>Group çalışması</p>
-                </div>
-                <button
-                    class="w-full py-2 bg-indig-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold transition-colors mt-2">
-                    Satın Al
-                </button>
+
+        <div class="w-full max-w-xs bg-white border border-gray-200 rounded-2xl p-6 flex flex-col gap-4 shadow-sm">
+            <div>
+                <h2 class="text-sm font-bold text-gray-800 uppercase tracking-wider">
+                    Standart Paket
+                </h2>
+                <p class="text-2xl font-extrabold text-gray-900 mt-1">99 TL / Ay</p>
+
             </div>
-        </div>  
+            <div
+                class="px-2.5 py-1 bg-indigo-100 border border-indigo-200 text-[9px] font-extrabold rounded-full self-start order-first uppercase tracking-wide">
+                En popüler paket (order-first)
+            </div>
+            <div class="text-xs text-gray-500 space-y-2 border border-gray-100 pt-4">
+                <p>1 Sınırsız Proje</p>
+                <p>25 tane kişisel proje</p>
+                <p>Group çalışması</p>
+            </div>
+            <button class="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold transition-colors mt-2">Satın Al</button>
+        </div>
+    </div>
 </body>
 
 </html>

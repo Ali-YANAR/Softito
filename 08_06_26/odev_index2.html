@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="tr">
+
+<head>
+    <!-- Türkçe harf desteği için gerekli olan karakter seti -->
+    <meta charset="UTF-8" />
+    <!-- Responsive tasarım için kullanılan cihazın ekran genişliğini alıyor -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Sayfa Başlığı Header kısmında bulunan -->
+    <title>Fiyatlandırma Kartı</title>
+    <!-- Güncel Tailwind CSS kütüphanesi (v3+ özellikleri ve text-[9px] desteği için) -->
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.css" />
+</head>
+
+<body class="bg-indigo-50 text-gray-800 font-sans min-h-screen p-8 flex flex-col items-center justify-center gap-6">
+    <div class="text-center max-w-md flex flex-col items-center justify-center gap-4">
+        <div>
+            <h1 class="text-xl font-bold text-gray-900 mb-2">
+                Fiyatlandırma Kartı (Flex Column)
+            </h1>
+            <p class="text-xs text-gray-500">
+                Kart elemanlarını üst üste sıralamak için flex-col, öne çıkan rozeti en
+                üstte göstermek için ise order-first sınıfı kullanılmıştır.
+            </p>
+        </div>
+
+        <!-- Kart Yapısı -->
+        <div class="w-full max-w-xs bg-white border border-gray-200 rounded-2xl p-6 flex flex-col gap-4 shadow-sm text-left">
+            <div>
+                <h2 class="text-sm font-bold text-gray-800 uppercase tracking-wider">
+                    Standart Paket
+                </h2>
+                <p class="text-2xl font-extrabold text-gray-900 mt-1">99 TL / Ay</p>
+            </div>
+            
+             <div class="px-2.5 py-1 bg-indigo-100 border border-indigo-200 text-[10px] text-indigo-700 font-extrabold rounded-full self-start order-first uppercase tracking-wide">
+                En popüler paket (order-first)
+            </div>
+            
+            <div class="text-xs text-gray-500 space-y-2 border-t border-gray-100 pt-4">
+                <p>✓ 1 Sınırsız Proje</p>
+                <p>✓ 25 tane kişisel proje</p>
+                <p>✓ Grup çalışması</p>
+            </div>
+            
+            <!-- Satın Alma Butonu genişliği full, dikey uzaklık, renk değişimi, butonun uzerine gelindiğinde renk değişimi, yazı tipi beyaz, köşeler yuvarlak, yazı büyüklüğü, font güzel geçişli, geçiş rengi, üste ki elemente yakınlığı -->
+            <button class="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold transition-colors mt-2">
+                Satın Al
+            </button>
+        </div>
+  
+    </div>
+</body>
+
+</html>
