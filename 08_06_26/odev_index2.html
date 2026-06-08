@@ -11,32 +11,59 @@
     <!-- Güncel Tailwind CSS kütüphanesi (v3+ özellikleri ve text-[9px] desteği için) -->
        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.css" />
 </head>
-
+<!--arka planı ve ana yerleşim ayarları. dizilimleri dikey sıralayıp ortalıyoruz.-->
 <body class="bg-indigo-50 text-gray-800 font-sans min-h-screen p-8 flex flex-col items-center justify-center gap-6">
+    <!--tüm iç yapıyı bir arada tutan flex box. yazılar ortalanmıış max genişlik alınıp responsible tasarım sunulmuştur. yerleşim yine dikey aralarındaki boşluk gap-4-->
     <div class="text-center max-w-md flex flex-col items-center justify-center gap-4">
+        <!--burası ilk başlığımızın başlangıc-->
         <div>
+            <!--başlık kısmı. yazı büyüklüğü, kalınlığı, rengi ve alt boşluk ayarları mb ile yapılmıştır.-->
             <h1 class="text-xl font-bold text-gray-900 mb-2">
                 Fiyatlandırma Kartı (Flex Column)
             </h1>
+            <!--açıklama kısmı. yazı küçültülmüş ve gri tonunda yapılarak başlıktan ayrılması sağlanmıştır.-->
             <p class="text-xs text-gray-500">
                 Kart elemanlarını üst üste sıralamak için flex-col, öne çıkan rozeti en
                 üstte göstermek için ise order-first sınıfı kullanılmıştır.
             </p>
         </div>
 
-        <!-- Kart Yapısı -->
+        <!--kart yapısı. beyaz zemin, gri border, yuvarlak köşeler, iç boşluk ve gölge efekti verilmiştir. flex-col ile dikey sıralama sağlanmıştır.-->
         <div class="w-full max-w-xs bg-white border border-gray-200 rounded-2xl p-6 flex flex-col gap-4 shadow-sm text-left">
             <div>
+                <!--paket başlığı. küçük harfler büyük harfe çevrilmiş, kalın ve gri tonunda yapılmıştır. burada tracking-wider kullanılmıştır.-->
                 <h2 class="text-sm font-bold text-gray-800 uppercase tracking-wider">
                     Standart Paket
                 </h2>
+                <!--fiyat kısmı. çok büyük ve kalın yapılarak dikkat çekmesi sağlanmıştır. yazı rengi gri ve alt boşluk ayarları mt ile yapılmıştır.-->
                 <p class="text-2xl font-extrabold text-gray-900 mt-1">99 TL / Ay</p>
             </div>
+            <!--rozet kısmı. arka plan rengi, border, yazı boyutu, kalınlığı, yuvarlak köşeler ve order-first ile en üste yerleştirilmiştir.-->
+            <!--
+            px-2.5 — yatay iç boşluk (padding-left + padding-right): 0.625rem = 10px
+            py-1 — dikey iç boşluk (padding-top + padding-bottom): 0.25rem = 4px
+            bg-indigo-100 — arka plan rengi: açık indigo/leylak tonu (#e0e7ff)
+            border — 1px katı kenarlık ekler (rengi bir sonraki sınıf belirler)
+            border-indigo-200 — kenarlık rengi: biraz daha koyu indigo
+            text-[10px] — yazı boyutu: tam 10px (köşeli parantez = özel değer)
+            text-indigo-700 — yazı rengi: koyu indigo (#4338ca)
+            font-extrabold — yazı kalınlığı: 800 (çok kalın)
+            rounded-full — tüm köşeler maksimum yuvarlak: border-radius: 9999px → hap/pill şekli
+            self-start — flex öğesi kendi çapraz ekseninde başa hizalanır: align-self: flex-start → genişliği içeriğe göre daralır
+            order-first — flex sırasında en öne geçer: order: -9999 (HTML'de nerede olursa olsun görsel olarak ilk sıraya çıkar)
+            uppercase — tüm harfleri büyük yapar: text-transform: uppercase
+            tracking-wide — harfler arası mesafe: 0.05em genişletilmiş
+                -->
             
              <div class="px-2.5 py-1 bg-indigo-100 border border-indigo-200 text-[10px] text-indigo-700 font-extrabold rounded-full self-start order-first uppercase tracking-wide">
                 En popüler paket (order-first)
             </div>
-            
+            <!--text-xs — yazı boyutu: 0.75rem = 12px
+            text-gray-500 — yazı rengi: orta ton gri (#6b7280)
+            space-y-2 — dikey kardeş öğeler arasına otomatik boşluk: 0.5rem = 8px (her çocuk elemana margin-top: 8px ekler, ilki hariç)
+            border-t — yalnızca üst kenara 1px katı kenarlık çizer
+            border-gray-100 — o kenarlığın rengi: çok açık gri (#f3f4f6)
+            pt-4 — üstten iç boşluk: 1rem = 16px (kenarlıktan sonra içeriği aşağı iter)-->
             <div class="text-xs text-gray-500 space-y-2 border-t border-gray-100 pt-4">
                 <p>✓ 1 Sınırsız Proje</p>
                 <p>✓ 25 tane kişisel proje</p>
@@ -44,6 +71,18 @@
             </div>
             
             <!-- Satın Alma Butonu genişliği full, dikey uzaklık, renk değişimi, butonun uzerine gelindiğinde renk değişimi, yazı tipi beyaz, köşeler yuvarlak, yazı büyüklüğü, font güzel geçişli, geçiş rengi, üste ki elemente yakınlığı -->
+            <!--
+            w-full — genişlik %100 — bulunduğu konteynerin tamamını kaplar
+            py-2 — dikey iç boşluk: 0.5rem = 8px (üst + alt)
+            bg-indigo-600 — arka plan rengi: koyu indigo (#4f46e5)
+            hover:bg-indigo-700 — fare üzerine gelince arka plan: daha koyu indigo (#4338ca) — hover: öneki sayesinde sadece hover durumunda aktif olur
+            text-white — yazı rengi: beyaz
+            rounded-lg — köşe yuvarlama: 0.5rem = 8px
+            text-xs — yazı boyutu: 0.75rem = 12px
+            font-semibold — yazı kalınlığı: 600
+            transition-colors — renk değişimlerini animasyonlu yapar — hover'da renk ani değil, yumuşak geçişle değişir (transition-property: color, background-color, border-color; duration: 150ms)
+            mt-2 — üstten dış boşluk: 0.5rem = 8px — üstündeki elemandan mesafe bırakır
+            -->
             <button class="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold transition-colors mt-2">
                 Satın Al
             </button>
