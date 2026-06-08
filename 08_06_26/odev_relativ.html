@@ -5,15 +5,52 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.css">
 
     <title>Relativ</title>
 </head>
 
 <body class="bg-gray-50 text-gray-800 font-sans min-h-screen p-4 flex flex-wrap items-start justify-center gap-6">
     <h1 class="text-2xl font-bold text-gray-800">Relativ</h1>
-    <p class="text-gray-600">Relativ, bir nesnenin hareketi veya konumu diğer bir nesneye göre tanımlandığında ortaya çıkan kavramdır.</p>
-
+    <p class="text-gray-600">Relativ, bir nesnenin hareketi veya konumu diğer bir nesneye göre tanımlandığında ortaya
+        çıkan kavramdır.</p>
+    <hr class="my-4 border-gray-300 w-full">
+    <div> 
+        <div>
+        <table class="table-auto border-collapse border border-gray-300 w-full font-xl" >
+            <tr class="bg-gray-200 text-gray-800 font-semibold">
+                <th class="border   border-gray-300 px-2 py-2">Property</th>
+                <th class="border   border-gray-300 px-2 py-2">Description</th>
+            </tr>
+            <tr>
+                <td>static</td>
+                <td>Varsayılan değer. Eleman normal belge akışına göre konumlandırılır.</td>
+            </tr>
+            <tr>
+                <td>fixed</td>
+                <td>Eleman, görüntü penceresine göre konumlandırılmıştır.</td>
+            </tr>
+            <tr>
+                <td>absolute</td>
+                <td>Element, en yakın konumlanmış ataya göre konumlandırılır.</td>
+            </tr>
+            <tr>
+                <td><span class="font-bold-xl font-semibold">relative</span></td>
+                <td>Eleman normal konumuna göre konumlandırılır.</td>
+            </tr>
+            <tr>
+                <td>sticky</td>
+                <td>Eleman, normal akışta konumlandırılır, ancak belirli bir kaydırma noktasına ulaşıldığında yapışkan hale gelir.</td>
+        </table>
+    </div>
+    <div class="mt-4">
+        <p class="text-gray-600">Örneğin, bir div elementi "relative" olarak konumlandırıldığında, bu element normal akışta bulunduğu yerde kalır ancak "top", "left", "bottom" ve "right" gibi özelliklerle hareket ettirilebilir. Diğer yandan, "absolute" olarak konumlandırılan bir element, en yakın konumlanmış ataya göre hareket eder ve normal akıştan çıkarılır.</p>
+ </div>
+ <div>
+    <img src="relativ.png" alt="Relativ" class="w-full h-auto rounded-lg shadow-md">
+    <img src="relativ_digerleri.png" alt="Relativ" class="w-full h-auto rounded-lg shadow-md mt-4">
+ </div>
+ <hr class="my-4 border-gray-300 w-full">
 </body>
 
 </html>
