@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frontend Geliştirme Eğitimi — Ders Planı</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f7ff;
+    --surface: #ffffff;
+    --surface2: #eef1f8;
+    --border: #dde2f0;
+    --accent: #3b6cf6;
+    --accent2: #6c47e8;
+    --morning: #16a34a;
+    --morning-bg: rgba(22,163,74,0.07);
+    --afternoon: #d97706;
+    --afternoon-bg: rgba(217,119,6,0.07);
+    --saturday: #dc2626;
+    --saturday-bg: rgba(220,38,38,0.06);
+    --text: #1e2540;
+    --muted: #6b7280;
+    --week-colors: #3b6cf6, #6c47e8, #16a34a, #d97706, #db2777, #0891b2, #ea580c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    min-height: 100vh;
+    padding: 0 0 80px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #eef1ff 0%, #f0ebff 50%, #e8f4ff 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 40px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(59,108,246,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 30%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(108,71,232,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid rgba(59,108,246,0.3);
+    padding: 5px 12px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity:1; transform:scale(1); }
+    50% { opacity:.5; transform:scale(1.3); }
+  }
+
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 54px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+  }
+  .hero h1 span {
+    background: linear-gradient(135deg, #4f8bff, #7c5cfc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    color: var(--muted);
+    margin-bottom: 36px;
+    max-width: 500px;
+    line-height: 1.6;
+  }
+
+  .stats {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .stat { display: flex; flex-direction: column; gap: 4px; }
+  .stat-val {
+    font-size: 28px;
+    font-weight: 700;
+    font-family: 'Space Mono', monospace;
+    color: var(--text);
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* LEGEND */
+  .legend-bar {
+    max-width: 1100px;
+    margin: 28px auto 0;
+    padding: 0 40px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 2px;
+  }
+  .legend-dot.morning { background: var(--morning); }
+  .legend-dot.afternoon { background: var(--afternoon); }
+  .legend-dot.saturday { background: var(--saturday); }
+
+  /* CONTENT */
+  .content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 40px 0;
+  }
+
+  /* WEEK BLOCK */
+  .week-block {
+    margin-bottom: 32px;
+  }
+
+  .week-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  .week-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 100px;
+    color: #fff;
+    white-space: nowrap;
+  }
+
+  .week-1 .week-badge { background: linear-gradient(135deg,#4f8bff,#6aa3ff); }
+  .week-2 .week-badge { background: linear-gradient(135deg,#7c5cfc,#9b7dfd); }
+  .week-3 .week-badge { background: linear-gradient(135deg,#22c55e,#4ade80); }
+  .week-4 .week-badge { background: linear-gradient(135deg,#f59e0b,#fbbf24); }
+  .week-5 .week-badge { background: linear-gradient(135deg,#ec4899,#f472b6); }
+  .week-6 .week-badge { background: linear-gradient(135deg,#06b6d4,#22d3ee); }
+  .week-7 .week-badge { background: linear-gradient(135deg,#f97316,#fb923c); }
+
+  .week-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .week-hours {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* DAY ROWS */
+  .days-grid { display: flex; flex-direction: column; gap: 8px; }
+
+  .day-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 1fr 64px;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .day-label {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+  }
+  .day-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .day-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .session-card {
+    border-radius: 10px;
+    padding: 14px 18px;
+    border: 1px solid transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: default;
+  }
+  .session-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+
+  .session-card.morning-card {
+    background: var(--morning-bg);
+    border-color: rgba(22,163,74,0.25);
+  }
+  .session-card.afternoon-card {
+    background: var(--afternoon-bg);
+    border-color: rgba(217,119,6,0.25);
+  }
+
+  .day-row.saturday-row .session-card.morning-card {
+    background: rgba(220,38,38,0.05);
+    border-color: rgba(220,38,38,0.2);
+  }
+  .day-row.saturday-row .session-card.afternoon-card {
+    background: rgba(220,38,38,0.05);
+    border-color: rgba(220,38,38,0.2);
+  }
+  .day-row.saturday-row .day-label {
+    background: rgba(220,38,38,0.05);
+    border-color: rgba(220,38,38,0.2);
+  }
+  .day-row.saturday-row .session-time {
+    color: var(--saturday) !important;
+  }
+
+  .session-time {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .session-card.morning-card .session-time { color: var(--morning); }
+  .session-card.afternoon-card .session-time { color: var(--afternoon); }
+
+  .session-title {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .hours-pill {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+  }
+
+  /* TOTAL BAR */
+  .total-bar {
+    max-width: 1100px;
+    margin: 40px auto 0;
+    padding: 0 40px;
+  }
+  .total-card {
+    background: linear-gradient(135deg, rgba(59,108,246,0.07), rgba(108,71,232,0.07));
+    border: 1px solid rgba(59,108,246,0.2);
+    border-radius: 16px;
+    padding: 28px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .total-label {
+    font-size: 15px;
+    color: var(--muted);
+  }
+  .total-value {
+    font-family: 'Space Mono', monospace;
+    font-size: 42px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #4f8bff, #7c5cfc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .total-unit {
+    font-size: 16px;
+    color: var(--muted);
+    margin-left: 8px;
+  }
+  .progress-wrap {
+    flex: 1;
+    min-width: 200px;
+    max-width: 400px;
+  }
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-family: 'Space Mono', monospace;
+  }
+  .progress-bar {
+    height: 8px;
+    background: var(--surface2);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4f8bff, #7c5cfc);
+    border-radius: 100px;
+    width: 0%;
+    transition: width 1s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* NOTE */
+  .note {
+    max-width: 1100px;
+    margin: 16px auto 0;
+    padding: 0 40px;
+  }
+  .note-inner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--muted);
+    padding: 12px 18px;
+    background: rgba(220,38,38,0.04);
+    border: 1px solid rgba(220,38,38,0.18);
+    border-radius: 10px;
+    width: fit-content;
+  }
+  .note-dot { width: 8px; height: 8px; border-radius: 2px; background: var(--saturday); flex-shrink: 0; }
+
+  @media (max-width: 768px) {
+    .hero, .legend-bar, .content, .total-bar, .note { padding-left: 20px; padding-right: 20px; }
+    .day-row { grid-template-columns: 1fr; }
+    .hours-pill { display: none; }
+    .stats { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Eğitim Programı · 2026</div>
+    <h1>Frontend <span>Geliştirme</span><br>Eğitimi</h1>
+    <p class="hero-sub">Modern web teknolojileri ile sıfırdan ileri seviyeye uzanan kapsamlı eğitim yol haritası.</p>
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-val">7</span>
+        <span class="stat-label">Hafta</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val">32</span>
+        <span class="stat-label">Gün</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val">180</span>
+        <span class="stat-label">Toplam Saat</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val">60+</span>
+        <span class="stat-label">Konu Başlığı</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="legend-bar">
+  <div class="legend-item"><div class="legend-dot morning"></div>Sabah Seansı (09:00–12:00)</div>
+  <div class="legend-item"><div class="legend-dot afternoon"></div>Öğleden Sonra Seansı (13:00–16:00)</div>
+  <div class="legend-item"><div class="legend-dot saturday"></div>Cumartesi</div>
+</div>
+
+<div class="content">
+
+  <!-- WEEK 1 -->
+  <div class="week-block week-1">
+    <div class="week-header">
+      <div class="week-badge">1. HAFTA</div>
+      <div class="week-line"></div>
+      <div class="week-hours">12 saat · 4–5 Haz 2026</div>
+    </div>
+    <div class="days-grid">
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Perşembe</div><div class="day-date">4 Haz 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">IDE Kurulumu, Eklentiler ve Geliştirici Araçlarına Giriş</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">DevTools ile Hata Ayıklama ve Kod Takibi</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Cuma</div><div class="day-date">5 Haz 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">Modern CSS Mantığı ve Tailwind CSS Kurulumu</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Tailwind Temelleri ve Sık Kullanılan Yapılar</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 2 -->
+  <div class="week-block week-2">
+    <div class="week-header">
+      <div class="week-badge">2. HAFTA</div>
+      <div class="week-line"></div>
+      <div class="week-hours">30 saat · 8–12 Haz 2026</div>
+    </div>
+    <div class="days-grid">
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Pazartesi</div><div class="day-date">8 Haz 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">Flexbox ve Grid ile Sayfa Yerleşimleri</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Responsive Tasarım ve Tailwind Uygulaması</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Salı</div><div class="day-date">9 Haz 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">Modern JavaScript Tekrarı (ES6+)</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Rest/Spread, Template Literals ve Array Metotları</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Çarşamba</div><div class="day-date">10 Haz 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">Asenkron JavaScript: Callback ve Promise Mantığı</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Async/Await ile API'den Veri Çekme (Fetch / Axios)</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Perşembe</div><div class="day-date">11 Haz 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">TypeScript'e Giriş ve Tip Yapıları</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Fonksiyonlar, Interface ve Generics Kullanımı</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Cuma</div><div class="day-date">12 Haz 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">React'e Giriş ve İlk Projenin Oluşturulması (Vite)</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">JSX, Component Yapısı ve Props Kullanımı</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 3 -->
+  <div class="week-block week-3">
+    <div class="week-header">
+      <div class="week-badge">3. HAFTA</div>
+      <div class="week-line"></div>
+      <div class="week-hours">30 saat · 15–19 Haz 2026</div>
+    </div>
+    <div class="days-grid">
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Pazartesi</div><div class="day-date">15 Haz 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">useState ile Veri Yönetimi</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Formlar ve Event Handling Mantığı</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Salı</div><div class="day-date">16 Haz 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">useEffect ve React Lifecycle Mantığı</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">API İstekleri ve Conditional Rendering</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Çarşamba</div><div class="day-date">17 Haz 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">React'ta Stil Yönetimi ve Tailwind Kullanımı</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Form Yönetimine Giriş (Formik / React Hook Form)</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Perşembe</div><div class="day-date">18 Haz 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">Componentler Arası Veri Aktarma (Props / Prop Drilling)</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Context API ve useContext ile Global Veri Yönetimi</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Cuma</div><div class="day-date">19 Haz 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">Context API Uygulaması (Tema / Sepet Yapısı)</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Custom Hook Yazımı ve Kod Tekrarını Azaltma</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 4 -->
+  <div class="week-block week-4">
+    <div class="week-header">
+      <div class="week-badge">4. HAFTA</div>
+      <div class="week-line"></div>
+      <div class="week-hours">30 saat · 22–26 Haz 2026</div>
+    </div>
+    <div class="days-grid">
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Pazartesi</div><div class="day-date">22 Haz 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">React Router Kurulumu ve Sayfa Geçişleri</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Dinamik Routing ve Parametre Kullanımı</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Salı</div><div class="day-date">23 Haz 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">Protected Route ve Giriş Sistemi Mantığı</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Dashboard Yapısında Router Kullanımı</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Çarşamba</div><div class="day-date">24 Haz 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">Redux'a Neden İhtiyaç Duyarız?</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Redux Toolkit Kurulumu ve Store Yapısı</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Perşembe</div><div class="day-date">25 Haz 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">Redux ile State Güncelleme ve Action Kullanımı</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">API İşlemleri ve createAsyncThunk Kullanımı</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Cuma</div><div class="day-date">26 Haz 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">Redux ile CRUD Uygulaması</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Redux DevTools ile Debug İşlemleri</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 5 -->
+  <div class="week-block week-5">
+    <div class="week-header">
+      <div class="week-badge">5. HAFTA</div>
+      <div class="week-line"></div>
+      <div class="week-hours">30 saat · 29 Haz – 3 Tem 2026</div>
+    </div>
+    <div class="days-grid">
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Pazartesi</div><div class="day-date">29 Haz 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">React Performansını Artırma (memo, useMemo, useCallback)</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">React + TypeScript Kullanımı</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Salı</div><div class="day-date">30 Haz 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">Popüler UI Kütüphanelerine Giriş (shadcn/ui, Material UI)</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Hazır UI Bileşenleri ile Arayüz Geliştirme</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Çarşamba</div><div class="day-date">1 Tem 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">React Testing'e Giriş (Vitest & RTL)</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Component Testleri Yazma</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Perşembe</div><div class="day-date">2 Tem 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">Hata Yönetimi ve Error Boundaries</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Build Alma ve Projeyi Yayına Açma (Vercel / Netlify)</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Cuma</div><div class="day-date">3 Tem 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">Proje Konularının Belirlenmesi ve Takımların Oluşturulması</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Proje Analizi, Gereksinimler ve Repo Süreci</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 6 -->
+  <div class="week-block week-6">
+    <div class="week-header">
+      <div class="week-badge">6. HAFTA</div>
+      <div class="week-line"></div>
+      <div class="week-hours">36 saat · 6–11 Tem 2026</div>
+    </div>
+    <div class="days-grid">
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Pazartesi</div><div class="day-date">6 Tem 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">Veritabanı Planı ve Mock API Kurulumu</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Figma Tasarımı ve Tailwind Altyapısı</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Salı</div><div class="day-date">7 Tem 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">Auth Yapısı ve Sayfa Yönlendirmeleri</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Ana Sayfa ve Listeleme Ekranları</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Çarşamba</div><div class="day-date">8 Tem 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">Veri Ekleme ve Detay Sayfaları</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Redux/Context ve API Bağlantıları</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Perşembe</div><div class="day-date">9 Tem 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">Dashboard ve Yönetim Paneli Geliştirme</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Arama, Filtreleme ve Dinamik Listeleme</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Cuma</div><div class="day-date">10 Tem 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">Kod İncelemesi ve Refactoring</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Responsive Kontroller ve Tarayıcı Testleri</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row saturday-row">
+        <div class="day-label"><div class="day-name">Cumartesi</div><div class="day-date">11 Tem 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">Projeyi Yayına Alma (Production Build & Vercel)</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">README Hazırlığı ve Sunum Düzenlemeleri</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 7 -->
+  <div class="week-block week-7">
+    <div class="week-header">
+      <div class="week-badge">7. HAFTA</div>
+      <div class="week-line"></div>
+      <div class="week-hours">12 saat · 13–14 Tem 2026</div>
+    </div>
+    <div class="days-grid">
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Pazartesi</div><div class="day-date">13 Tem 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">Grup Sunumları (1. ve 2. Grup)</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Grup Sunumları (3. ve 4. Grup)</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+      <div class="day-row">
+        <div class="day-label"><div class="day-name">Salı</div><div class="day-date">14 Tem 2026</div></div>
+        <div class="session-card morning-card"><div class="session-time">09:00 – 12:00</div><div class="session-title">Genel Değerlendirme, CV ve Kariyer Tavsiyeleri</div></div>
+        <div class="session-card afternoon-card"><div class="session-time">13:00 – 16:00</div><div class="session-title">Soru–Cevap ve Kapanış</div></div>
+        <div class="hours-pill">6s</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="total-bar">
+  <div class="total-card">
+    <div>
+      <div class="total-label">Toplam Eğitim Süresi</div>
+      <div><span class="total-value">180</span><span class="total-unit">saat</span></div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-labels"><span>4 Haz 2026</span><span>14 Tem 2026</span></div>
+      <div class="progress-bar"><div class="progress-fill" id="pf"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="note">
+  <div class="note-inner">
+    <div class="note-dot"></div>
+    Sarı (kırmızı) dolgulu günler Cumartesi'ye karşılık gelmektedir.
+  </div>
+</div>
+
+<script>
+  // Animate progress bar on load
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('pf').style.width = '100%';
+    }, 300);
+  });
+</script>
+</body>
+</html>
