@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YeşilSayfa</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0f1a0f;--forest:#1a4a2e;--leaf:#2d7a4f;--sage:#5aab78;--mist:#e8f5ed;--paper:#f7fbf8;--white:#fff;--rule:#c8e6d2;--gold:#a8c44a}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:64px;background:rgba(247,251,248,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule)}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--forest)}
+.nav-logo span{color:var(--sage);font-style:italic}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-family:'Space Grotesk',sans-serif;font-size:0.85rem;font-weight:500;color:var(--forest);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--sage)}
+.nav-cta{background:var(--forest)!important;color:var(--white)!important;padding:.45rem 1.2rem;border-radius:2rem;transition:background .2s!important}
+.nav-cta:hover{background:var(--leaf)!important}
+
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:90px 5vw 60px;gap:4rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(90,171,120,.1) 0%,transparent 70%);pointer-events:none}
+.eyebrow{font-family:'Space Grotesk',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);margin-bottom:1.25rem;display:flex;align-items:center;gap:.75rem}
+.eyebrow::before{content:'';display:inline-block;width:28px;height:2px;background:var(--sage)}
+h1{font-family:'DM Serif Display',serif;font-size:clamp(2.6rem,4.5vw,3.8rem);line-height:1.08;color:var(--forest);letter-spacing:-.02em;margin-bottom:1.4rem}
+h1 em{font-style:italic;color:var(--sage)}
+.hero-sub{font-size:1rem;line-height:1.75;color:#3a5a3a;max-width:460px;margin-bottom:2.25rem;font-weight:300}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{font-family:'Space Grotesk',sans-serif;font-size:.875rem;font-weight:600;padding:.85rem 1.9rem;border-radius:2rem;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:all .25s;letter-spacing:.02em}
+.btn-p{background:var(--forest);color:var(--white)}
+.btn-p:hover{background:var(--leaf);transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,74,46,.25)}
+.btn-s{background:transparent;color:var(--forest);border:2px solid var(--rule)}
+.btn-s:hover{border-color:var(--sage);color:var(--leaf)}
+
+.hero-visual{display:flex;justify-content:center;align-items:center}
+.stack{position:relative;width:300px;height:380px}
+.sheet{position:absolute;width:260px;height:340px;border-radius:4px;box-shadow:0 4px 24px rgba(0,0,0,.07)}
+.s1{background:linear-gradient(135deg,#fff,#f0faf3);bottom:0;left:50%;transform:translateX(-50%) rotate(-6deg);border:1px solid #d4eddc}
+.s2{background:linear-gradient(135deg,#fff,#f7fbf8);bottom:0;left:50%;transform:translateX(-50%) rotate(-2deg);border:1px solid #ddf0e4}
+.s3{background:#fff;bottom:0;left:50%;transform:translateX(-50%);border:1px solid var(--rule);padding:1.75rem;display:flex;flex-direction:column;justify-content:space-between;animation:float 5s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
+.s3-logo{font-family:'DM Serif Display',serif;font-size:1rem;color:var(--forest)}
+.s3-lines{flex:1;margin:1.25rem 0;display:flex;flex-direction:column;gap:.65rem}
+.ln{height:9px;border-radius:2px;background:var(--mist)}
+.s3-badge{background:var(--mist);border-radius:1rem;padding:.35rem .85rem;font-family:'Space Grotesk',sans-serif;font-size:.65rem;font-weight:700;color:var(--leaf);letter-spacing:.08em;text-transform:uppercase;display:inline-block}
+.pill{position:absolute;background:var(--white);border:1px solid var(--rule);border-radius:1rem;padding:.55rem 1rem;font-family:'Space Grotesk',sans-serif;box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.pill .n{font-size:1rem;font-weight:700;color:var(--forest)}
+.pill .l{font-size:.62rem;color:#6a8a6a;letter-spacing:.06em;text-transform:uppercase}
+.p1{bottom:60px;left:-45px}.p2{top:40px;right:-35px}
+
+.trust{background:var(--forest);padding:1.1rem 5vw;display:flex;align-items:center;justify-content:center;gap:3.5rem;flex-wrap:wrap}
+.ti{font-family:'Space Grotesk',sans-serif;font-size:.75rem;font-weight:500;color:rgba(255,255,255,.7);letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:.45rem}
+.ti span{color:var(--gold)}
+
+section{padding:5.5rem 5vw}
+.sec-eye{font-family:'Space Grotesk',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);margin-bottom:.9rem}
+h2{font-family:'DM Serif Display',serif;font-size:clamp(1.9rem,3vw,2.6rem);color:var(--forest);line-height:1.15;letter-spacing:-.015em;margin-bottom:1.1rem}
+h2 em{font-style:italic;color:var(--sage)}
+.sec-sub{font-size:.95rem;line-height:1.75;color:#4a6a4a;max-width:500px;font-weight:300}
+
+/* PRODUCTS */
+.products{background:var(--white)}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:3rem}
+.pc{background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:1.85rem;transition:all .3s;position:relative;overflow:hidden}
+.pc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--leaf),var(--gold));transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.pc:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(26,74,46,.1);border-color:var(--sage)}
+.pc:hover::after{transform:scaleX(1)}
+.pico{width:46px;height:46px;background:var(--mist);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1.1rem}
+.pc h3{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;color:var(--forest);margin-bottom:.45rem}
+.pc p{font-size:.835rem;line-height:1.6;color:#5a7a5a;margin-bottom:1.1rem}
+.tag{display:inline-block;background:var(--mist);color:var(--leaf);font-family:'Space Grotesk',sans-serif;font-size:.67rem;font-weight:600;padding:.28rem .65rem;border-radius:1rem;letter-spacing:.06em;text-transform:uppercase;margin-right:.35rem;margin-bottom:.3rem}
+
+/* WHY */
+.why{background:var(--mist)}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:3rem}
+.why-items{display:flex;flex-direction:column;gap:1.85rem}
+.wi{display:flex;gap:1.1rem;align-items:flex-start}
+.wi-num{font-family:'DM Serif Display',serif;font-size:2.2rem;color:var(--rule);line-height:1;flex-shrink:0;width:44px}
+.wi h4{font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:700;color:var(--forest);margin-bottom:.3rem}
+.wi p{font-size:.835rem;line-height:1.65;color:#4a6a4a;font-weight:300}
+.why-box{background:var(--white);border-radius:14px;padding:2.25rem;border:1px solid var(--rule);box-shadow:0 8px 32px rgba(26,74,46,.06)}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.sb{background:var(--paper);border-radius:10px;padding:1.4rem;border:1px solid var(--rule)}
+.sb .big{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--forest);line-height:1;margin-bottom:.2rem}
+.sb .big span{color:var(--sage)}
+.sb .lbl{font-family:'Space Grotesk',sans-serif;font-size:.68rem;font-weight:600;color:#6a8a6a;letter-spacing:.06em;text-transform:uppercase}
+.quote{margin-top:1.4rem;padding:1.1rem;background:var(--mist);border-radius:10px;font-size:.8rem;color:#3a5a3a;line-height:1.7;font-style:italic}
+
+/* SEGMENTS */
+.segments{background:var(--white)}
+.seggrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;margin-top:3rem}
+.sc{border:1px solid var(--rule);border-radius:12px;padding:1.6rem 1.4rem;text-align:center;transition:all .25s;background:var(--paper)}
+.sc:hover{background:var(--mist);border-color:var(--sage);transform:translateY(-3px)}
+.sc .sico{font-size:1.8rem;margin-bottom:.85rem;display:block}
+.sc h4{font-family:'Space Grotesk',sans-serif;font-size:.875rem;font-weight:700;color:var(--forest);margin-bottom:.35rem}
+.sc p{font-size:.775rem;color:#5a7a5a;line-height:1.55}
+
+/* PROCESS */
+.process{background:var(--forest)}
+.process .sec-eye{color:var(--gold)}
+.process h2{color:var(--white)}
+.process h2 em{color:var(--sage)}
+.psteps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.75rem;margin-top:3rem;position:relative}
+.psteps::before{content:'';position:absolute;top:26px;left:12%;right:12%;height:1px;background:rgba(255,255,255,.12)}
+.step{text-align:center;position:relative}
+.stc{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin:0 auto 1.1rem;position:relative;z-index:1;transition:all .3s}
+.step:hover .stc{background:var(--sage);border-color:var(--sage)}
+.step h4{font-family:'Space Grotesk',sans-serif;font-size:.875rem;font-weight:600;color:var(--white);margin-bottom:.4rem}
+.step p{font-size:.775rem;color:rgba(255,255,255,.5);line-height:1.6}
+
+/* PRICING */
+.pricing{background:var(--paper)}
+.prcgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:3rem;align-items:start}
+.prc{background:var(--white);border:1px solid var(--rule);border-radius:14px;padding:1.85rem;transition:all .3s}
+.prc.feat{background:var(--forest);border-color:var(--forest);transform:scale(1.04);box-shadow:0 20px 60px rgba(26,74,46,.25)}
+.prc:hover:not(.feat){border-color:var(--sage);box-shadow:0 8px 32px rgba(26,74,46,.08)}
+.prc-lbl{font-family:'Space Grotesk',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);margin-bottom:.65rem}
+.feat .prc-lbl{color:var(--gold)}
+.prc h3{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--forest);margin-bottom:.2rem}
+.feat h3{color:var(--white)}
+.prc-desc{font-size:.8rem;color:#6a8a6a;margin-bottom:1.3rem}
+.feat .prc-desc{color:rgba(255,255,255,.55)}
+.pdiv{height:1px;background:var(--rule);margin:1.1rem 0}
+.feat .pdiv{background:rgba(255,255,255,.15)}
+.pf{display:flex;align-items:flex-start;gap:.55rem;font-size:.8rem;color:#4a6a4a;margin-bottom:.65rem;line-height:1.5}
+.pf::before{content:'✓';color:var(--sage);font-weight:700;flex-shrink:0}
+.feat .pf{color:rgba(255,255,255,.8)}
+.feat .pf::before{color:var(--gold)}
+.pcta{display:block;text-align:center;margin-top:1.5rem;padding:.7rem;border-radius:2rem;font-family:'Space Grotesk',sans-serif;font-size:.85rem;font-weight:600;text-decoration:none;transition:all .25s;border:2px solid var(--rule);color:var(--forest)}
+.pcta:hover{border-color:var(--sage);background:var(--mist)}
+.feat .pcta{background:var(--white);color:var(--forest);border-color:var(--white)}
+
+/* CONTACT */
+.contact{background:var(--mist)}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:3rem}
+.cinfo{display:flex;flex-direction:column;gap:1.25rem}
+.ccard{display:flex;align-items:flex-start;gap:.9rem;background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:1.1rem}
+.cico{width:38px;height:38px;background:var(--mist);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.ccard h4{font-family:'Space Grotesk',sans-serif;font-size:.68rem;font-weight:700;color:var(--sage);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.15rem}
+.ccard p{font-size:.875rem;color:var(--forest);font-weight:500}
+.cform{display:flex;flex-direction:column;gap:.85rem}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.fg{display:flex;flex-direction:column;gap:.32rem}
+.fg label{font-family:'Space Grotesk',sans-serif;font-size:.7rem;font-weight:600;color:var(--forest)}
+.fg input,.fg select,.fg textarea{font-family:'Inter',sans-serif;font-size:.85rem;padding:.7rem .9rem;border:1.5px solid var(--rule);border-radius:8px;background:var(--white);color:var(--ink);outline:none;transition:border-color .2s;-webkit-appearance:none}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--sage)}
+.fg textarea{resize:vertical;min-height:90px}
+
+footer{background:var(--ink);padding:3rem 5vw 1.75rem}
+.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.fbrand .flogo{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--white);margin-bottom:.65rem}
+.fbrand .flogo span{color:var(--sage);font-style:italic}
+.fbrand p{font-size:.8rem;line-height:1.7;color:rgba(255,255,255,.4);max-width:220px}
+.fcol h5{font-family:'Space Grotesk',sans-serif;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--white);margin-bottom:.9rem}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.fcol ul a{font-size:.8rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s}
+.fcol ul a:hover{color:var(--sage)}
+.fbot{display:flex;justify-content:space-between;align-items:center;font-size:.75rem;color:rgba(255,255,255,.3)}
+.socials{display:flex;gap:.65rem}
+.sl{width:32px;height:32px;background:rgba(255,255,255,.06);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;text-decoration:none;transition:background .2s}
+.sl:hover{background:var(--sage)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-content>*{animation:fadeUp .7s ease both}
+.hero-content>*:nth-child(1){animation-delay:.1s}
+.hero-content>*:nth-child(2){animation-delay:.2s}
+.hero-content>*:nth-child(3){animation-delay:.3s}
+.hero-content>*:nth-child(4){animation-delay:.4s}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;text-align:center}.hero-sub{max-width:100%}.hero-actions{justify-content:center}.hero-visual{display:none}
+  .pgrid{grid-template-columns:1fr 1fr}.why-grid{grid-template-columns:1fr}.seggrid{grid-template-columns:1fr 1fr}
+  .psteps{grid-template-columns:1fr 1fr}.prcgrid{grid-template-columns:1fr}.prc.feat{transform:none}
+  .cgrid{grid-template-columns:1fr}.fgrid{grid-template-columns:1fr 1fr}.nav-links{display:none}
+}
+@media(max-width:600px){.pgrid{grid-template-columns:1fr}.frow{grid-template-columns:1fr}.fgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Yeşil<span>Sayfa</span></div>
+  <ul class="nav-links">
+    <li><a href="#urunler">Ürünler</a></li>
+    <li><a href="#neden">Neden Biz</a></li>
+    <li><a href="#segmentler">Müşteriler</a></li>
+    <li><a href="#fiyatlar">Fiyatlar</a></li>
+    <li><a href="#iletisim" class="nav-cta">Teklif Al</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="eyebrow">İthalat & Toptan Satış</div>
+    <h1>Her sayfada<br><em>kalite</em> konuşur.</h1>
+    <p class="hero-sub">Endonezya ve Brezilya'nın sertifikalı fabrikalarından gelen A4 kağıdı — doğrudan fabrikadan ofisinize, rekabetçi toptan fiyatlarla.</p>
+    <div class="hero-actions">
+      <a href="#iletisim" class="btn btn-p">Toptan Fiyat Al →</a>
+      <a href="#urunler" class="btn btn-s">Ürünleri İncele</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="stack">
+      <div class="sheet s1"></div>
+      <div class="sheet s2"></div>
+      <div class="sheet s3">
+        <div class="s3-logo">YeşilSayfa</div>
+        <div class="s3-lines">
+          <div class="ln" style="width:100%"></div>
+          <div class="ln" style="width:75%"></div>
+          <div class="ln" style="width:100%"></div>
+          <div class="ln" style="width:55%"></div>
+          <div class="ln" style="width:80%"></div>
+          <div class="ln" style="width:100%"></div>
+          <div class="ln" style="width:65%"></div>
+        </div>
+        <div class="s3-badge">80 GSM · A4 · Premium</div>
+      </div>
+      <div class="pill p1"><div class="n">80<small style="font-size:.65rem;color:var(--sage)">gsm</small></div><div class="l">Gramaj</div></div>
+      <div class="pill p2"><div class="n">104<small style="font-size:.65rem;color:var(--sage)">%</small></div><div class="l">Beyazlık</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="ti"><span>🌿</span> Sürdürülebilir Kaynak</div>
+  <div class="ti"><span>🚢</span> Doğrudan İthalat</div>
+  <div class="ti"><span>📦</span> Palet & Konteyner</div>
+  <div class="ti"><span>⚡</span> 24 Saat Teklif</div>
+  <div class="ti"><span>✅</span> ISO Sertifikalı</div>
+</div>
+
+<section class="products" id="urunler">
+  <div class="sec-eye">Ürün Kataloğu</div>
+  <h2>Tüm ihtiyaçlar için<br><em>doğru kağıt</em></h2>
+  <p class="sec-sub">80 gramdan 90 grama, beyaz seriden renkli seçeneklere geniş ürün gamı.</p>
+  <div class="pgrid">
+    <div class="pc"><div class="pico">📄</div><h3>A4 Standart — 80gr</h3><p>Günlük ofis kullanımı için. Yüksek opaklık, düzgün kesim, tüm yazıcılarla uyumlu.</p><span class="tag">500 yaprak</span><span class="tag">5 top/koli</span><span class="tag">Beyaz</span></div>
+    <div class="pc"><div class="pico">⭐</div><h3>A4 Premium — 80gr</h3><p>Brezilya kaynaklı, CIE 104% beyazlık. Laser, inkjet ve yüksek hızlı kopyalama için.</p><span class="tag">CIE 104%</span><span class="tag">Premium</span><span class="tag">FSC</span></div>
+    <div class="pc"><div class="pico">🖨️</div><h3>A4 Pro — 90gr</h3><p>Sunum ve kurumsal dokümanlar için ağır gramaj. İki taraflı baskıda mükemmel sonuç.</p><span class="tag">90 GSM</span><span class="tag">Çift Taraflı</span></div>
+    <div class="pc"><div class="pico">🎨</div><h3>Renkli Seri — 80gr</h3><p>5 pastel renk seçeneği. Arşiv, kategori ayrımı ve yaratıcı işler için ideal.</p><span class="tag">5 Renk</span><span class="tag">Pastel</span></div>
+    <div class="pc"><div class="pico">📦</div><h3>Toptan Palet</h3><p>1 palet = 72 koli. Büyük hacimli alıcılar için özel toptan fiyat avantajı.</p><span class="tag">72 koli/palet</span><span class="tag">Kurumsal</span></div>
+    <div class="pc"><div class="pico">🏭</div><h3>Konteyner Satışı</h3><p>20' ve 40'HC opsiyonları. Distribütörler için fabrika çıkışı özel fiyat.</p><span class="tag">20' konteyner</span><span class="tag">40'HC</span></div>
+  </div>
+</section>
+
+<section class="why" id="neden">
+  <div class="sec-eye">Fark Yaratan Detaylar</div>
+  <h2>Kalite sadece<br><em>kağıtta değil</em></h2>
+  <div class="why-grid">
+    <div class="why-items">
+      <div class="wi"><div class="wi-num">01</div><div><h4>Doğrudan Fabrika Tedariki</h4><p>Endonezya ve Brezilya'nın sertifikalı fabrikalarıyla doğrudan çalışıyoruz. Aracısız tedarik = daha düşük maliyet.</p></div></div>
+      <div class="wi"><div class="wi-num">02</div><div><h4>Sürdürülebilir Orman Kaynağı</h4><p>Tüm ürünlerimiz FSC sertifikalı ormanlarda yetişen ağaçlardan üretilmektedir.</p></div></div>
+      <div class="wi"><div class="wi-num">03</div><div><h4>Kalite Garantisi</h4><p>Her sevkiyat öncesi ISO standartlarında kalite kontrolü. Beyazlık, gramaj, opaklık — hepsi test edilir.</p></div></div>
+      <div class="wi"><div class="wi-num">04</div><div><h4>Hızlı Teslimat</h4><p>İstanbul içi aynı gün, Türkiye geneli 1–3 iş günü. Palet siparişlerinde özel lojistik çözümler.</p></div></div>
+    </div>
+    <div class="why-box">
+      <div class="sgrid">
+        <div class="sb"><div class="big">104<span>%</span></div><div class="lbl">CIE Beyazlık</div></div>
+        <div class="sb"><div class="big">80<span>gsm</span></div><div class="lbl">Standart Gramaj</div></div>
+        <div class="sb"><div class="big">24<span>sa</span></div><div class="lbl">Teklif Süresi</div></div>
+        <div class="sb"><div class="big">FSC<span style="font-size:.9rem">✓</span></div><div class="lbl">Sertifika</div></div>
+      </div>
+      <div class="quote">"Kağıt sıradan bir girdi değil, markanızın her dokümanındaki ilk izlenimdir. Biz bunu ciddiye alıyoruz." <br><strong style="color:var(--sage);font-style:normal;font-size:.72rem;letter-spacing:.06em">— YEŞİLSAYFA EKİBİ</strong></div>
+    </div>
+  </div>
+</section>
+
+<section class="segments" id="segmentler">
+  <div class="sec-eye">Müşteri Segmentleri</div>
+  <h2>Herkes için<br><em>doğru çözüm</em></h2>
+  <p class="sec-sub">Bireysel ofisten büyük ölçekli kuruma kadar her segmente özel fiyatlandırma.</p>
+  <div class="seggrid">
+    <div class="sc"><span class="sico">🖨️</span><h4>Matbaalar</h4><p>Yüksek hacimli baskı için sürekli stok ve rekabetçi toptan fiyat</p></div>
+    <div class="sc"><span class="sico">🏫</span><h4>Okullar & Üniversiteler</h4><p>İhale uyumlu teklifler ve dönemsel büyük parti teslimat</p></div>
+    <div class="sc"><span class="sico">🏛️</span><h4>Kamu Kurumları</h4><p>KİK kayıtlı tedarik, e-fatura uyumlu, kurumsal sözleşme</p></div>
+    <div class="sc"><span class="sico">🏢</span><h4>Kurumsal Ofisler</h4><p>Aylık abonelik modeli, zamanında teslimat, fiyat sabitleme</p></div>
+    <div class="sc"><span class="sico">🛍️</span><h4>Kırtasiye Toptancıları</h4><p>Palet alımında maksimum iskonto ve öncelikli stok erişimi</p></div>
+    <div class="sc"><span class="sico">🏪</span><h4>Kırtasiye Perakendecileri</h4><p>Esnek minimum sipariş ve hızlı teslimat</p></div>
+    <div class="sc"><span class="sico">🏥</span><h4>Sağlık Kuruluşları</h4><p>Sürekli stok garantisi ve öncelikli teslimat</p></div>
+    <div class="sc"><span class="sico">📦</span><h4>Distribütörler</h4><p>Bölgesel distribütörlük anlaşmaları ve konteyner alım fırsatları</p></div>
+  </div>
+</section>
+
+<section class="process">
+  <div class="sec-eye">Nasıl Çalışıyoruz</div>
+  <h2>Siparişten teslimata<br><em>4 adım</em></h2>
+  <div class="psteps">
+    <div class="step"><div class="stc">📞</div><h4>Teklif Talebi</h4><p>WhatsApp, telefon veya form ile ihtiyacınızı bildirin</p></div>
+    <div class="step"><div class="stc">📋</div><h4>Fiyat Teklifi</h4><p>24 saat içinde detaylı teklifiniz e-posta ile gelir</p></div>
+    <div class="step"><div class="stc">✅</div><h4>Sipariş & Ödeme</h4><p>Onay verin, hazırlamaya başlayalım</p></div>
+    <div class="step"><div class="stc">🚚</div><h4>Teslimat</h4><p>İstanbul içi aynı gün, Türkiye geneli 1–3 iş günü</p></div>
+  </div>
+</section>
+
+<section class="pricing" id="fiyatlar">
+  <div class="sec-eye">Fiyatlandırma</div>
+  <h2>Hacminize uygun<br><em>en iyi fiyat</em></h2>
+  <p class="sec-sub">Ne kadar çok alırsanız, o kadar çok kazanırsınız. Fiyatlar KDV hariçtir.</p>
+  <div class="prcgrid">
+    <div class="prc"><div class="prc-lbl">Perakende</div><h3>Koli Alım</h3><p class="prc-desc">1–9 koli arası siparişler</p><div class="pdiv"></div><div class="pf">Min. 1 koli (5 top / 2.500 yaprak)</div><div class="pf">Aynı gün kargo (İstanbul)</div><div class="pf">Standart & Premium seri</div><div class="pf">E-fatura kesilir</div><a href="#iletisim" class="pcta">Fiyat Öğren</a></div>
+    <div class="prc feat"><div class="prc-lbl">⭐ En Popüler</div><h3>Palet Alım</h3><p class="prc-desc">10 koli ve üzeri siparişler</p><div class="pdiv"></div><div class="pf">Koli başına %15–25 indirim</div><div class="pf">Öncelikli stok garantisi</div><div class="pf">Ücretsiz araç teslimatı (İstanbul)</div><div class="pf">Vadeli ödeme seçeneği</div><div class="pf">Dedike hesap yöneticisi</div><a href="#iletisim" class="pcta">Toptan Teklif Al</a></div>
+    <div class="prc"><div class="prc-lbl">Kurumsal</div><h3>Konteyner</h3><p class="prc-desc">Distribütörler ve büyük alıcılar</p><div class="pdiv"></div><div class="pf">20' ve 40'HC opsiyonları</div><div class="pf">FOB / CIF teslim</div><div class="pf">Fabrika çıkışı fiyat</div><div class="pf">Bölgesel distribütörlük imkânı</div><a href="#iletisim" class="pcta">Görüşme Talep Et</a></div>
+  </div>
+</section>
+
+<section class="contact" id="iletisim">
+  <div class="sec-eye">İletişim</div>
+  <h2>Hemen teklif<br><em>alın</em></h2>
+  <p class="sec-sub">Formu doldurun, 24 saat içinde size özel teklifinizi hazırlayalım.</p>
+  <div class="cgrid">
+    <div class="cinfo">
+      <div class="ccard"><div class="cico">📱</div><div><h4>WhatsApp / Telefon</h4><p>+90 555 000 00 00</p></div></div>
+      <div class="ccard"><div class="cico">✉️</div><div><h4>E-Posta</h4><p>info@yesilsayfa.com.tr</p></div></div>
+      <div class="ccard"><div class="cico">📍</div><div><h4>Adres & Depo</h4><p>İstanbul, Türkiye</p></div></div>
+      <div class="ccard"><div class="cico">🕐</div><div><h4>Çalışma Saatleri</h4><p>Hafta içi 08:00 – 18:00</p></div></div>
+    </div>
+    <div class="cform">
+      <div class="frow">
+        <div class="fg"><label>Ad Soyad</label><input type="text" placeholder="Ahmet Yılmaz"></div>
+        <div class="fg"><label>Firma</label><input type="text" placeholder="Firma Adı"></div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label>Telefon</label><input type="tel" placeholder="+90 5xx xxx xx xx"></div>
+        <div class="fg"><label>E-Posta</label><input type="email" placeholder="email@firma.com"></div>
+      </div>
+      <div class="fg"><label>Ürün & Miktar</label>
+        <select>
+          <option>A4 80gr Standart — Koli (1–9)</option>
+          <option>A4 80gr Standart — Palet (10+)</option>
+          <option>A4 80gr Premium — Palet / Konteyner</option>
+          <option>A4 90gr Pro Seri</option>
+          <option>Konteyner (20' / 40'HC)</option>
+          <option>Diğer</option>
+        </select>
+      </div>
+      <div class="fg"><label>Notunuz</label><textarea placeholder="Aylık tahmini tüketim, özel gereksinimler..."></textarea></div>
+      <button class="btn btn-p" style="width:100%;justify-content:center;">Teklif Talep Et →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fgrid">
+    <div class="fbrand"><div class="flogo">Yeşil<span>Sayfa</span></div><p>Türkiye'nin güvenilir A4 kağıt ithalatçısı. Doğrudan fabrikadan, sürdürülebilir kaynaklardan.</p></div>
+    <div class="fcol"><h5>Ürünler</h5><ul><li><a href="#">A4 80gr Standart</a></li><li><a href="#">A4 80gr Premium</a></li><li><a href="#">A4 90gr Pro</a></li><li><a href="#">Renkli Seri</a></li></ul></div>
+    <div class="fcol"><h5>Kurumsal</h5><ul><li><a href="#">Hakkımızda</a></li><li><a href="#">Neden Biz</a></li><li><a href="#">Sürdürülebilirlik</a></li></ul></div>
+    <div class="fcol"><h5>Destek</h5><ul><li><a href="#">Teklif Al</a></li><li><a href="#">SSS</a></li><li><a href="#">İletişim</a></li></ul></div>
+  </div>
+  <div class="fbot">
+    <span>© 2026 YeşilSayfa. Tüm hakları saklıdır.</span>
+    <div class="socials">
+      <a class="sl" href="#">📸</a>
+      <a class="sl" href="#">💬</a>
+      <a class="sl" href="#">💼</a>
+      <a class="sl" href="#">✈️</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

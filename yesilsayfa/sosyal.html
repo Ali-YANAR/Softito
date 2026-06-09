@@ -1,0 +1,418 @@
+import { useState } from "react";
+
+const C = {
+  forest: "#1a4a2e", leaf: "#2d7a4f", sage: "#5aab78",
+  mist: "#e8f5ed", paper: "#f7fbf8", white: "#ffffff",
+  rule: "#c8e6d2", gold: "#a8c44a", ink: "#0f1a0f"
+};
+
+const nav = [
+  { id: "ig", icon: "📸", label: "Instagram" },
+  { id: "tiktok", icon: "🎵", label: "TikTok/Reels" },
+  { id: "linkedin", icon: "💼", label: "LinkedIn" },
+  { id: "wa", icon: "💬", label: "WhatsApp" },
+  { id: "tg", icon: "✈️", label: "Telegram" },
+  { id: "banner", icon: "🖼️", label: "Bannerlar" },
+  { id: "video", icon: "🎬", label: "Video Senaryosu" },
+  { id: "caption", icon: "✍️", label: "Post Metinleri" },
+];
+
+function Tag({ children, dark }) {
+  return (
+    <span style={{
+      display: "inline-block",
+      background: dark ? "rgba(168,196,74,.2)" : C.mist,
+      border: dark ? "1px solid rgba(168,196,74,.35)" : `1px solid ${C.rule}`,
+      color: dark ? C.gold : C.leaf,
+      fontFamily: "system-ui", fontSize: 10, fontWeight: 700,
+      letterSpacing: "0.1em", textTransform: "uppercase",
+      padding: "3px 9px", borderRadius: 20, marginRight: 4, marginBottom: 4
+    }}>{children}</span>
+  );
+}
+
+function SectionLabel({ children }) {
+  return <div style={{ fontFamily: "system-ui", fontSize: 10, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: C.sage, marginBottom: 6 }}>{children}</div>;
+}
+
+function Card({ children, style }) {
+  return <div style={{ background: C.white, border: `1px solid ${C.rule}`, borderRadius: 12, padding: 20, marginBottom: 14, ...style }}>{children}</div>;
+}
+
+// ── INSTAGRAM KARE ──
+function IGKare({ light }) {
+  const bg = light
+    ? "linear-gradient(145deg,#f7fbf8,#e8f5ed)"
+    : "linear-gradient(145deg,#1a4a2e 0%,#2d7a4f 60%,#5aab78 100%)";
+  const tc = light ? C.forest : C.white;
+  const sc = light ? "#4a6a4a" : "rgba(255,255,255,.6)";
+  return (
+    <div style={{ width: 300, height: 300, background: bg, borderRadius: 10, padding: 22, display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 6px 28px rgba(0,0,0,.12)", flexShrink: 0 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <span style={{ fontFamily: "Georgia,serif", fontSize: 14, color: tc }}>Yeşil<em style={{ color: C.gold }}>Sayfa</em></span>
+        <Tag dark={!light}>{light ? "Palet Fiyatı" : "Toptan Satış"}</Tag>
+      </div>
+      <div>
+        <div style={{ fontFamily: "Georgia,serif", fontSize: 22, color: tc, lineHeight: 1.15, marginBottom: 8 }}>
+          {light ? <>Toplu alımda<br /><em style={{ color: C.sage }}>fark yaratır.</em></> : <>Kaliteli kağıt,<br /><em style={{ color: C.gold }}>adil fiyat.</em></>}
+        </div>
+        <div style={{ fontSize: 11, color: sc, lineHeight: 1.6 }}>
+          {light ? "Palet ve konteyner satışında özel toptan fiyat avantajı." : "Endonezya & Brezilya'nın en iyi fabrikalarından direkt size."}
+        </div>
+      </div>
+      <div style={{ display: "flex", gap: 8 }}>
+        {light
+          ? [["72", "koli", "1 Palet"], ["%25↓", "", "İskonto"]].map(([n, s, l]) => (
+            <div key={l} style={{ background: C.white, border: `1px solid ${C.rule}`, borderRadius: 7, padding: "7px 11px" }}>
+              <div style={{ fontFamily: "system-ui", fontWeight: 700, fontSize: 14, color: C.forest }}>{n}<small style={{ fontSize: 10, color: C.sage }}>{s}</small></div>
+              <div style={{ fontSize: 9, color: "#6a8a6a", textTransform: "uppercase", letterSpacing: "0.06em" }}>{l}</div>
+            </div>
+          ))
+          : [["80", "gsm", "Gramaj"], ["104", "%", "Beyazlık"], ["24", "sa", "Teklif"]].map(([n, s, l]) => (
+            <div key={l} style={{ background: "rgba(255,255,255,.08)", border: "1px solid rgba(255,255,255,.12)", borderRadius: 7, padding: "7px 11px" }}>
+              <div style={{ fontFamily: "system-ui", fontWeight: 700, fontSize: 14, color: C.white }}>{n}<small style={{ fontSize: 10, color: C.sage }}>{s}</small></div>
+              <div style={{ fontSize: 9, color: "rgba(255,255,255,.45)", textTransform: "uppercase", letterSpacing: "0.06em" }}>{l}</div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  );
+}
+
+// ── STORY ──
+function IGStory() {
+  return (
+    <div style={{ width: 168, height: 300, background: "linear-gradient(180deg,#0f1a0f,#1a4a2e 40%,#2d7a4f)", borderRadius: 10, padding: 16, display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 6px 28px rgba(0,0,0,.12)", flexShrink: 0 }}>
+      <Tag dark>🌿 Yeşil & Kaliteli</Tag>
+      <div style={{ textAlign: "center" }}>
+        <div style={{ width: 60, height: 80, background: "rgba(255,255,255,.07)", border: "1px solid rgba(255,255,255,.12)", borderRadius: 3, margin: "0 auto 12px", display: "flex", alignItems: "flex-end", justifyContent: "center", paddingBottom: 6 }}>
+          <span style={{ fontSize: 9, color: "rgba(255,255,255,.3)", letterSpacing: "0.1em" }}>80gsm</span>
+        </div>
+        <div style={{ fontFamily: "Georgia,serif", fontSize: 18, color: C.white, lineHeight: 1.2, marginBottom: 6 }}>A4 Kağıt<br /><em style={{ color: C.gold }}>Toptan</em><br />Satışta</div>
+        <div style={{ fontSize: 10, color: "rgba(255,255,255,.5)", lineHeight: 1.6 }}>Ofis, matbaa, okul — sana uygun fiyat.</div>
+      </div>
+      <div style={{ background: C.sage, color: C.white, fontFamily: "system-ui", fontSize: 10, fontWeight: 700, padding: "9px", borderRadius: 18, textAlign: "center" }}>📲 Hemen Teklif Al →</div>
+    </div>
+  );
+}
+
+// ── TİKTOK ──
+function TikTok() {
+  return (
+    <div style={{ width: 168, height: 300, background: "#0a0a0a", borderRadius: 10, position: "relative", overflow: "hidden", boxShadow: "0 6px 28px rgba(0,0,0,.2)", flexShrink: 0 }}>
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg,transparent 30%,rgba(26,74,46,.95))" }} />
+      <div style={{ position: "absolute", top: 10, left: 10, right: 10, display: "flex", justifyContent: "space-between", alignItems: "center", zIndex: 3 }}>
+        <span style={{ fontFamily: "Georgia,serif", fontSize: 12, color: C.white }}>Yeşil<em style={{ color: C.gold }}>Sayfa</em></span>
+        <span style={{ background: "rgba(255,255,255,.1)", borderRadius: 18, padding: "2px 7px", fontSize: 9, color: "rgba(255,255,255,.65)", fontFamily: "system-ui" }}>🎵 Trending</span>
+      </div>
+      <div style={{ position: "absolute", top: "28%", left: "50%", transform: "translateX(-50%)", zIndex: 1 }}>
+        {[[-8, -10, "rgba(232,245,237,.8)"], [-3, -4, "rgba(247,251,248,.9)"], [2, 0, "#fff"]].map(([rot, tx, bg], i) => (
+          <div key={i} style={{ position: "absolute", width: 70, height: 90, background: bg, borderRadius: 2, transform: `rotate(${rot}deg) translateX(${tx}px)` }} />
+        ))}
+        <div style={{ width: 70, height: 90 }} />
+      </div>
+      <div style={{ position: "absolute", right: 8, bottom: 50, display: "flex", flexDirection: "column", gap: 12, alignItems: "center", zIndex: 3 }}>
+        {[["❤️", "4.2K"], ["💬", "89"], ["↗️", "312"]].map(([ic, ct]) => (
+          <div key={ic} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1 }}>
+            <span style={{ fontSize: 18 }}>{ic}</span>
+            <span style={{ fontSize: 9, color: "rgba(255,255,255,.65)", fontFamily: "system-ui" }}>{ct}</span>
+          </div>
+        ))}
+      </div>
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: 12, zIndex: 3 }}>
+        <div style={{ fontFamily: "system-ui", fontSize: 10, color: C.white, lineHeight: 1.5, marginBottom: 6 }}>
+          Ofisine kaliteli kağıt arıyorsan <strong style={{ color: C.gold }}>dur bir dakika 📄</strong>
+        </div>
+        <div style={{ fontSize: 9, color: "rgba(255,255,255,.4)", fontFamily: "system-ui" }}>#a4kağıt #toptan #yeşilsayfa</div>
+      </div>
+    </div>
+  );
+}
+
+// ── WHATSAPP KARTI ──
+function WACard() {
+  return (
+    <div style={{ width: 280, background: C.white, borderRadius: 14, overflow: "hidden", boxShadow: "0 6px 28px rgba(0,0,0,.09)", flexShrink: 0 }}>
+      <div style={{ background: "linear-gradient(135deg,#1a4a2e,#2d7a4f)", padding: 16, position: "relative" }}>
+        <div style={{ position: "absolute", top: 10, right: 12, fontSize: 22, opacity: .3 }}>🌿</div>
+        <div style={{ fontFamily: "Georgia,serif", fontSize: 16, color: C.white }}>Yeşil<em style={{ color: C.gold }}>Sayfa</em></div>
+        <div style={{ fontSize: 10, color: "rgba(255,255,255,.55)", fontFamily: "system-ui", marginTop: 2 }}>A4 Kağıt · İthalat & Toptan Satış</div>
+      </div>
+      <div style={{ padding: 16 }}>
+        <div style={{ background: "#f0f4f1", borderRadius: "0 10px 10px 10px", padding: "10px 12px", fontSize: 11, lineHeight: 1.65, color: "#2a3a2a", marginBottom: 10 }}>
+          <strong style={{ color: C.forest, display: "block", marginBottom: 2, fontFamily: "system-ui", fontSize: 10 }}>📄 Merhaba!</strong>
+          A4 80gr fotokopi kağıdını fabrikadan direkt temin ediyoruz. Koli, palet ve konteyner bazında toptan fiyat.
+        </div>
+        {["80gr / 500 yaprak / 5 top koli", "Palet alımda %15–25 iskonto", "İstanbul içi aynı gün teslimat", "E-fatura, KİK uyumlu"].map(t => (
+          <div key={t} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 11, color: "#3a5a3a", marginBottom: 5 }}>
+            <span style={{ fontSize: 10 }}>✅</span>{t}
+          </div>
+        ))}
+        <div style={{ background: "#25d366", color: C.white, fontFamily: "system-ui", fontSize: 11, fontWeight: 700, padding: 9, borderRadius: 9, textAlign: "center", marginTop: 10 }}>
+          💬 Teklif: +90 555 000 00 00
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── TELEGRAM ──
+function TGCard() {
+  const posts = [
+    { text: "📦 Stok Güncelleme: A4 80gr Premium geldi! Palet alımında özel fiyat.", date: "Bugün 09:15" },
+    { text: "💡 80gr kağıt 75gr'a göre %12 daha az jamming yapıyor. Matbaalara öneririz!", date: "Dün 14:30" },
+    { text: "🚚 İstanbul içi aynı gün, Türkiye geneli 1-3 iş günü. Sipariş: +90 555 000 00 00", date: "2 gün önce" },
+  ];
+  return (
+    <div style={{ width: 280, background: C.white, borderRadius: 14, overflow: "hidden", boxShadow: "0 6px 28px rgba(0,0,0,.09)", flexShrink: 0 }}>
+      <div style={{ background: "linear-gradient(135deg,#0088cc,#006699)", padding: 16, position: "relative" }}>
+        <div style={{ position: "absolute", top: 10, right: 12, fontSize: 22, opacity: .25 }}>✈️</div>
+        <div style={{ fontFamily: "Georgia,serif", fontSize: 16, color: C.white }}>Yeşil<em style={{ color: "#a8e6ff" }}>Sayfa</em></div>
+        <div style={{ fontSize: 10, color: "rgba(255,255,255,.55)", fontFamily: "system-ui", marginTop: 2 }}>@yesilsayfa_toptan</div>
+      </div>
+      <div style={{ padding: 14 }}>
+        <div style={{ display: "flex", gap: 12, marginBottom: 12, paddingBottom: 12, borderBottom: `1px solid ${C.rule}` }}>
+          {[["1.2K", "Üye"], ["5/gün", "Gönderi"], ["%78", "Erişim"]].map(([n, l]) => (
+            <div key={l} style={{ textAlign: "center" }}>
+              <div style={{ fontFamily: "system-ui", fontWeight: 700, fontSize: 14, color: C.forest }}>{n}</div>
+              <div style={{ fontSize: 9, color: "#6a8a6a", textTransform: "uppercase", letterSpacing: "0.06em" }}>{l}</div>
+            </div>
+          ))}
+        </div>
+        {posts.map((p, i) => (
+          <div key={i} style={{ background: C.paper, borderRadius: 7, padding: "8px 10px", borderLeft: `2px solid ${C.sage}`, fontSize: 10, color: "#3a5a3a", lineHeight: 1.5, marginBottom: 7 }}>
+            {p.text}
+            <div style={{ fontSize: 9, color: "#8aaa8a", marginTop: 2, fontFamily: "system-ui" }}>{p.date}</div>
+          </div>
+        ))}
+        <div style={{ background: "#0088cc", color: C.white, fontFamily: "system-ui", fontSize: 11, fontWeight: 700, padding: 9, borderRadius: 9, textAlign: "center" }}>
+          ✈️ Katıl: t.me/yesilsayfa_toptan
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function App() {
+  const [active, setActive] = useState("ig");
+
+  const pages = {
+    ig: (
+      <div>
+        <div style={{ fontFamily: "Georgia,serif", fontSize: 22, color: C.forest, marginBottom: 4 }}>Instagram Görselleri</div>
+        <div style={{ fontSize: 13, color: "#5a7a5a", marginBottom: 20 }}>Feed post (1080×1080) ve Story (1080×1920) formatları</div>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 20, alignItems: "flex-start" }}>
+          <div>
+            <SectionLabel>Feed Post #1 — Koyu Tema</SectionLabel>
+            <IGKare />
+          </div>
+          <div>
+            <SectionLabel>Feed Post #2 — Açık Tema</SectionLabel>
+            <IGKare light />
+          </div>
+          <div>
+            <SectionLabel>Story Format</SectionLabel>
+            <IGStory />
+          </div>
+        </div>
+      </div>
+    ),
+    tiktok: (
+      <div>
+        <div style={{ fontFamily: "Georgia,serif", fontSize: 22, color: C.forest, marginBottom: 4 }}>TikTok & Reels</div>
+        <div style={{ fontSize: 13, color: "#5a7a5a", marginBottom: 20 }}>Dikey format önizlemesi + video fikirleri</div>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 20, alignItems: "flex-start" }}>
+          <div><SectionLabel>9:16 Format</SectionLabel><TikTok /></div>
+          <div style={{ maxWidth: 300 }}>
+            <SectionLabel>Video Fikirleri</SectionLabel>
+            {[
+              ["🎬 Video #1 — "Tok tok" (15 sn)", "Masaya koli bırak → kağıtlar saçıl → fiyat etiketi → "Bu kadar mı kolaydı?""],
+              ["🎬 Video #2 — "Biliyor muydun?" (30 sn)", ""A4 kağıdını neden dışarıdan ithal ediyoruz?" → 3 madde → CTA"],
+              ["🎬 Video #3 — Unboxing (45 sn)", "Palet açılışı, koli sayma, test baskısı. ASMR stili."],
+              ["🎬 Video #4 — Karşılaştırma (20 sn)", "İki kağıt yan yana baskı testi: Sol piyasa / Sağ YeşilSayfa"],
+            ].map(([t, d]) => (
+              <Card key={t} style={{ padding: 14, marginBottom: 10 }}>
+                <div style={{ fontFamily: "system-ui", fontSize: 11, fontWeight: 700, color: C.forest, marginBottom: 5 }}>{t}</div>
+                <div style={{ fontSize: 11, color: "#4a6a4a", lineHeight: 1.6 }}>{d}</div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+    ),
+    linkedin: (
+      <div>
+        <div style={{ fontFamily: "Georgia,serif", fontSize: 22, color: C.forest, marginBottom: 4 }}>LinkedIn Görselleri</div>
+        <div style={{ fontSize: 13, color: "#5a7a5a", marginBottom: 20 }}>Profil kapak ve kurumsal post</div>
+        <SectionLabel>LinkedIn Kapak — 1584×396</SectionLabel>
+        <div style={{ width: "100%", maxWidth: 520, height: 130, background: "linear-gradient(110deg,#1a4a2e,#2d7a4f,#1a4a2e)", borderRadius: 10, padding: "0 28px", display: "flex", alignItems: "center", gap: 28, boxShadow: "0 6px 28px rgba(0,0,0,.12)", marginBottom: 20 }}>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontFamily: "system-ui", fontSize: 9, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: C.gold, marginBottom: 5 }}>Türkiye'nin Kağıt Tedarikçisi</div>
+            <div style={{ fontFamily: "Georgia,serif", fontSize: 18, color: C.white, lineHeight: 1.2 }}>Doğrudan fabrikadan,<br /><em style={{ color: C.gold }}>güvenle elinizde.</em></div>
+          </div>
+          <div style={{ display: "flex", gap: 10 }}>
+            {[["80gsm", "Kalite"], ["24sa", "Teklif"], ["FSC✓", "Sertifika"]].map(([n, l]) => (
+              <div key={l} style={{ textAlign: "center", background: "rgba(255,255,255,.07)", border: "1px solid rgba(255,255,255,.1)", borderRadius: 7, padding: "7px 11px" }}>
+                <div style={{ fontFamily: "Georgia,serif", fontSize: 14, color: C.white }}>{n}</div>
+                <div style={{ fontSize: 9, color: "rgba(255,255,255,.4)", textTransform: "uppercase", letterSpacing: "0.06em", fontFamily: "system-ui" }}>{l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <SectionLabel>LinkedIn Post — 1200×627</SectionLabel>
+        <div style={{ width: 380, height: 200, background: "linear-gradient(120deg,#0f1a0f,#1a4a2e)", borderRadius: 10, padding: 22, display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 6px 28px rgba(0,0,0,.12)" }}>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <span style={{ fontFamily: "Georgia,serif", fontSize: 13, color: C.white }}>Yeşil<em style={{ color: C.gold }}>Sayfa</em></span>
+            <Tag dark>B2B Tedarik</Tag>
+          </div>
+          <div style={{ fontFamily: "Georgia,serif", fontSize: 17, color: C.white, lineHeight: 1.2 }}>Matbaanız, okulunuz,<br />kurumunuz için <em style={{ color: C.gold }}>doğru kağıt.</em></div>
+          <div style={{ display: "flex", gap: 8 }}>
+            {["Palet Satışı", "B2B Fiyat", "İhale Uyumlu"].map(t => (
+              <div key={t} style={{ background: "rgba(255,255,255,.08)", border: "1px solid rgba(255,255,255,.12)", borderRadius: 7, padding: "6px 10px", fontFamily: "system-ui", fontSize: 10, color: C.white }}>{t}</div>
+            ))}
+          </div>
+        </div>
+      </div>
+    ),
+    wa: (
+      <div>
+        <div style={{ fontFamily: "Georgia,serif", fontSize: 22, color: C.forest, marginBottom: 4 }}>WhatsApp Kartı</div>
+        <div style={{ fontSize: 13, color: "#5a7a5a", marginBottom: 20 }}>Müşterilere göndereceğiniz dijital kartvizit + status metinleri</div>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 20, alignItems: "flex-start" }}>
+          <div><SectionLabel>Görsel Kart</SectionLabel><WACard /></div>
+          <div style={{ maxWidth: 260 }}>
+            <SectionLabel>Status Metinleri</SectionLabel>
+            {[
+              ["Status #1", "📦 Bu hafta palet alımında özel fiyat!\nArayın, konuşalım 👇\n+90 555 000 00 00"],
+              ["Status #2", "📄 A4 80gr stokta!\nKoli → Palet → Konteyner\nHer ölçekte toptan fiyat 🌿"],
+              ["Status #3", "✅ Bugün sipariş ver,\nyarın deponuzda!\n(İstanbul içi aynı gün) 🚚"],
+            ].map(([t, d]) => (
+              <Card key={t} style={{ padding: 13, marginBottom: 9 }}>
+                <div style={{ fontFamily: "system-ui", fontSize: 10, fontWeight: 700, color: C.sage, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 5 }}>{t}</div>
+                <div style={{ fontSize: 11, color: "#3a5a3a", lineHeight: 1.65, whiteSpace: "pre-line" }}>{d}</div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+    ),
+    tg: (
+      <div>
+        <div style={{ fontFamily: "Georgia,serif", fontSize: 22, color: C.forest, marginBottom: 4 }}>Telegram Kanalı</div>
+        <div style={{ fontSize: 13, color: "#5a7a5a", marginBottom: 20 }}>Kanal görünümü + haftalık içerik takvimi</div>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 20, alignItems: "flex-start" }}>
+          <div><SectionLabel>Kanal Önizlemesi</SectionLabel><TGCard /></div>
+          <div style={{ maxWidth: 260 }}>
+            <SectionLabel>Haftalık Takvim</SectionLabel>
+            {[["Pazartesi 📦", "Haftalık stok durumu + haftanın fırsatı"], ["Salı 💡", "Ürün bilgisi / teknik ipucu"], ["Çarşamba 🤝", "Müşteri yorumu / referans"], ["Perşembe 📊", "Fiyat güncelleme / kampanya"], ["Cuma 🚚", "Hafta sonu teslimat + son sipariş hatırlatması"]].map(([g, d]) => (
+              <Card key={g} style={{ padding: 12, marginBottom: 8 }}>
+                <div style={{ fontFamily: "system-ui", fontSize: 11, fontWeight: 700, color: C.forest, marginBottom: 3 }}>{g}</div>
+                <div style={{ fontSize: 11, color: "#4a6a4a" }}>{d}</div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+    ),
+    banner: (
+      <div>
+        <div style={{ fontFamily: "Georgia,serif", fontSize: 22, color: C.forest, marginBottom: 4 }}>Web Reklam Bannerları</div>
+        <div style={{ fontSize: 13, color: "#5a7a5a", marginBottom: 20 }}>Google Display ve site içi formatlar</div>
+        <SectionLabel>Leaderboard — 728×90</SectionLabel>
+        <div style={{ width: "100%", maxWidth: 520, height: 65, background: C.forest, borderRadius: 8, overflow: "hidden", position: "relative", marginBottom: 20, boxShadow: "0 4px 16px rgba(0,0,0,.1)" }}>
+          <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 160, background: "linear-gradient(90deg,#2d7a4f,transparent)", display: "flex", alignItems: "center", padding: "0 16px" }}>
+            <span style={{ fontFamily: "Georgia,serif", fontSize: 14, color: C.white }}>Yeşil<em style={{ color: C.gold }}>Sayfa</em></span>
+          </div>
+          <div style={{ position: "absolute", left: 180, top: "50%", transform: "translateY(-50%)" }}>
+            <div style={{ fontFamily: "system-ui", fontSize: 11, fontWeight: 700, color: C.white }}>A4 Kağıt Toptan — Fabrikadan Direkt Türkiye'ye</div>
+            <div style={{ fontSize: 10, color: "rgba(255,255,255,.5)" }}>80gr Premium · Palet & Konteyner · 24 Saat Teklif</div>
+          </div>
+          <div style={{ position: "absolute", right: 14, top: "50%", transform: "translateY(-50%)", background: C.gold, color: C.forest, fontFamily: "system-ui", fontSize: 10, fontWeight: 700, padding: "6px 14px", borderRadius: 18 }}>Teklif Al →</div>
+        </div>
+        <SectionLabel>Medium Rectangle — 300×250</SectionLabel>
+        <div style={{ width: 280, height: 230, background: "linear-gradient(145deg,#1a4a2e,#5aab78)", borderRadius: 10, padding: 20, display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 6px 28px rgba(0,0,0,.12)" }}>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <span style={{ fontFamily: "Georgia,serif", fontSize: 13, color: C.white }}>Yeşil<em style={{ color: C.gold }}>Sayfa</em></span>
+            <Tag dark>Reklam</Tag>
+          </div>
+          <div style={{ fontFamily: "Georgia,serif", fontSize: 20, color: C.white, lineHeight: 1.2 }}>Toptan A4<br /><em style={{ color: C.gold }}>kağıt</em> artık<br />kolay.</div>
+          <div style={{ background: "rgba(255,255,255,.15)", borderRadius: 18, padding: "8px 16px", fontFamily: "system-ui", fontSize: 11, fontWeight: 700, color: C.white, display: "inline-block" }}>Hemen Teklif Al →</div>
+        </div>
+      </div>
+    ),
+    video: (
+      <div style={{ maxWidth: 620 }}>
+        <div style={{ fontFamily: "Georgia,serif", fontSize: 22, color: C.forest, marginBottom: 4 }}>Video Senaryoları</div>
+        <div style={{ fontSize: 13, color: "#5a7a5a", marginBottom: 20 }}>TikTok, Reels ve YouTube Shorts için</div>
+        {[
+          { title: "🎬 Video #1 — \"Dur Bir Dakika\"", dur: "15–20 sn", scenes: [["Hook (0–3sn)", "Masaya hızlıca bir koli A4 kağıt bırakılıyor. Yakın plan. \"Ofisine kağıt mı arıyorsun?\" text overlay."], ["Ortası (3–10sn)", "Koli açılıyor, kağıtlar açılıyor. \"80gsm · CIE 104% · 500 yaprak\" text overlay teker teker beliriyor."], ["CTA (10–15sn)", "Yazıcıya kağıt takılıyor, temiz baskı çıkıyor. \"Bunu biz getirdik.\" + link biyografide."]], vo: "\"Endonezya'nın en iyi fabrikasından, direkt senin ofisinе. YeşilSayfa ile toptan kağıt bu kadar kolay.\"" },
+          { title: "🎬 Video #2 — \"Biliyor muydun?\"", dur: "30–45 sn", scenes: [["Hook", "\"A4 kağıdınızı nereden alıyorsunuz? Büyük ihtimalle çok fazla para ödüyorsunuz.\""], ["Problem", "Fiyat etiketi göster: \"Piyasada koli 600 TL.\" Kaş kaldır. \"Biz direkt fabrikadan getiriyoruz.\""], ["CTA", "\"Link biyografide, WhatsApp'a yazın, 24 saatte teklifiniz hazır.\""]], vo: "Anahtar mesajlar: Aracısız · Fabrikadan direkt · 24 saat teklif · Kapıya teslimat" },
+          { title: "🎬 Video #3 — Unboxing / ASMR", dur: "45–60 sn", scenes: [["Sahne 1", "Palet üzerinde koliler yakın plan. Bant kesme sesi. \"Yeni parti geldi\" overlay."], ["Sahne 2", "Koli açılıyor. Toplar ayrılıyor. \"Taze fabrika kağıdı böyle görünür.\""], ["Fiyat Reveal", "Fiyat yazılı kağıt kameraya tutuluyor. \"Bu fiyata başka yerde bulamazsın 👇\""]], vo: "ASMR stil, müzik minimal, ses efektleri ön planda." },
+        ].map(v => (
+          <Card key={v.title}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
+              <span style={{ fontFamily: "system-ui", fontSize: 13, fontWeight: 700, color: C.forest }}>{v.title}</span>
+              <span style={{ fontSize: 10, color: C.sage, background: C.mist, padding: "2px 8px", borderRadius: 8, fontWeight: 600 }}>{v.dur}</span>
+            </div>
+            {v.scenes.map(([l, t]) => (
+              <div key={l} style={{ background: C.paper, borderRadius: 7, padding: "8px 12px", borderLeft: `3px solid ${C.sage}`, marginBottom: 7 }}>
+                <div style={{ fontFamily: "system-ui", fontSize: 9, fontWeight: 700, color: C.sage, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 3 }}>{l}</div>
+                <div style={{ fontSize: 12, color: "#3a5a3a", lineHeight: 1.6 }}>{t}</div>
+              </div>
+            ))}
+            <div style={{ background: C.mist, borderRadius: 7, padding: "8px 12px", marginTop: 4 }}>
+              <div style={{ fontFamily: "system-ui", fontSize: 9, fontWeight: 700, color: C.leaf, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 3 }}>🎙️ Voiceover / Not</div>
+              <div style={{ fontSize: 12, color: C.forest, fontStyle: "italic", lineHeight: 1.6 }}>{v.vo}</div>
+            </div>
+          </Card>
+        ))}
+      </div>
+    ),
+    caption: (
+      <div style={{ maxWidth: 580 }}>
+        <div style={{ fontFamily: "Georgia,serif", fontSize: 22, color: C.forest, marginBottom: 4 }}>Hazır Post Metinleri</div>
+        <div style={{ fontSize: 13, color: "#5a7a5a", marginBottom: 20 }}>Kopyala, yapıştır, paylaş</div>
+        {[
+          ["📸 Instagram", `Kaliteli kağıt artık fabrikadan geliyor! 🌿\n\n80gsm A4 kağıdımızı Endonezya ve Brezilya'nın sertifikalı fabrikalarından direkt ithal ediyoruz.\n\n✅ Koli, palet ve konteyner bazında toptan fiyat\n✅ İstanbul içi aynı gün teslimat\n✅ 24 saat içinde teklif\n✅ E-fatura, KİK uyumlu\n\n📲 Teklif: +90 555 000 00 00\n\n#a4kağıt #toptankağıt #ofismalzemeleri #matbaa #yeşilsayfa`],
+          ["💼 LinkedIn", `Türkiye'nin kağıt tedarik zincirinde yeni bir sayfa açıyoruz.\n\nYeşilSayfa olarak A4 80gr fotokopi kağıdını Endonezya ve Brezilya'nın ISO sertifikalı fabrikalarından doğrudan ithal ediyoruz.\n\n→ Aracısız tedarik = rekabetçi fiyat\n→ FSC sertifikalı, sürdürülebilir üretim\n→ KİK uyumluluğu\n\nGörüşmek için DM veya info@yesilsayfa.com.tr\n\n#tedarikzinciri #kağıt #B2B #ithalat`],
+          ["🎵 TikTok / Reels", `Ofisine A4 kağıt alıyorsan dur bir dakika 📄\n\nBiz bunu Endonezya'dan direkt getiriyoruz ve marketten aldığından çok daha ucuza alabilirsin.\n\n80gsm ✅ 500 yaprak/top ✅ Koli ve palet satışı ✅\n\nBiyografimdeki linkten fiyat listesini al 👆\n\n#a4kağıt #toptan #ofis #yeşilsayfa #fyp #keşfet`],
+          ["✈️ Telegram", `📦 STOK GÜNCELLEME\n\nA4 80gr Standart ve Premium serimiz depoda!\n\n🔹 Koli fiyatı: Teklif için yazın\n🔹 Palet (72 koli): %20 iskonto\n🔹 Konteyner: Fabrika çıkış fiyatı\n\n📲 Sipariş: +90 555 000 00 00\n⏰ Bugün sipariş = yarın teslim (İstanbul)`],
+          ["💬 WhatsApp Toplu Mesaj", `Merhaba,\n\nYeşilSayfa A4 Kağıt olarak size özel toptan fiyat listesini paylaşmak istiyoruz.\n\n📄 Ürün: A4 80gr Fotokopi Kağıdı\n📦 Paket: 500 yaprak/top | 5 top/koli\n🌿 Kaynak: Endonezya & Brezilya\n\n• Koli alımı (1–9 koli)\n• Toptan (10+ koli / palet)\n• Konteyner (20' / 40'HC)\n\nDetaylı fiyat için bu mesajı yanıtlayın.\n\nYeşilSayfa Ekibi\n+90 555 000 00 00`],
+        ].map(([plt, txt]) => (
+          <Card key={plt}>
+            <div style={{ fontFamily: "system-ui", fontSize: 10, fontWeight: 700, color: C.sage, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8 }}>{plt}</div>
+            <pre style={{ fontSize: 12, color: "#3a5a3a", lineHeight: 1.75, whiteSpace: "pre-wrap", fontFamily: "inherit" }}>{txt}</pre>
+          </Card>
+        ))}
+      </div>
+    ),
+  };
+
+  return (
+    <div style={{ display: "flex", minHeight: "100vh", fontFamily: "system-ui, sans-serif", background: "#f0f4f1" }}>
+      {/* Sidebar */}
+      <div style={{ width: 200, background: C.forest, padding: "20px 12px", display: "flex", flexDirection: "column", gap: 3, flexShrink: 0 }}>
+        <div style={{ fontFamily: "Georgia,serif", fontSize: 18, color: C.white, marginBottom: 20, paddingBottom: 16, borderBottom: "1px solid rgba(255,255,255,.1)" }}>
+          Yeşil<em style={{ color: C.sage }}>Sayfa</em>
+        </div>
+        {nav.map(n => (
+          <button key={n.id} onClick={() => setActive(n.id)} style={{
+            display: "flex", alignItems: "center", gap: 8, padding: "8px 10px", borderRadius: 7, border: "none",
+            background: active === n.id ? "rgba(90,171,120,.2)" : "transparent",
+            color: active === n.id ? C.white : "rgba(255,255,255,.6)",
+            fontFamily: "system-ui", fontSize: 12, fontWeight: active === n.id ? 600 : 500,
+            cursor: "pointer", textAlign: "left", width: "100%", transition: "all .2s"
+          }}>
+            <span style={{ fontSize: 14 }}>{n.icon}</span>{n.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Content */}
+      <div style={{ flex: 1, padding: 28, overflowX: "hidden" }}>
+        {pages[active]}
+      </div>
+    </div>
+  );
+}

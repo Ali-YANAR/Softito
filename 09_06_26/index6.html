@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <center>
+        <div>
+            <h1>map() ve filter() dizi metodları</h1>
+        </div>
+        <div>
+            <h3>Ürün Arama</h3>
+            <input type="text" id="input-search">
+        </div>
+        <div>
+            <label>Maksimum fiyat</label>
+            <input type="number" id="input-price-Limit" value="50000">
+        </div>
+        <div>
+            <button id="btn-filter">Filtrele</button>
+        </div>
+        <div>
+            <h3>urun listesi</h3>
+            <div id="product-list">
+                ürünler listelenmedi
+            </div>
+            <script>
+                const products = [
+                    { id: 1, ad: 'Iphone 17 PRO MAX', fiyat: 110000 },
+                    { id: 2, ad: 'Iphone 16 PRO MAX', fiyat: 25000 },
+                    { id: 3, ad: 'Iphone 15 PRO MAX', fiyat: 47590 },
+                    { id: 4, ad: 'Iphone 14 PRO MAX', fiyat: 99000 },
+                    { id: 5, ad: 'Iphone 13 PRO MAX', fiyat: 78000 }
+
+                ];
+
+                const Listele = () => {
+                    const arama = document.getElementById('input-search').value.toLowerCase();
+                    const Limit = parseFloat(document.getElementById('input-price-Limit').value) || 999999;
+
+                    const filtrelenmis = products.filter(product => {
+                        return product.ad.toLowerCase().includes(arama) && product.fiyat <= Limit;
+                    });
+
+                    const kartlarHTML = filtrelenmis.map(product => `
+        <div style="border:1px solid; margin:5px; padding:5px;">
+            <span>Ürün Adı:${product.ad}</span>
+            <span>Fiyatı:${product.fiyat}</span>
+        </div>
+        `).join('');
+
+                    document.getElementById('product-list').innerHTML = kartlarHTML || '<div>Aramanıza uygun ürün bulunamadı</div>';
+                };
+
+                document.getElementById('btn-filter').addEventListener('click', Listele);
+                Listele(); // Sayfa yüklendiğinde tüm ürünleri listele
+
+            </script>
+
+
+    </center>
+</body>
+
+</html>
