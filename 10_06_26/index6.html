@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.css" />
+
+</head>
+
+<body class="p-6 bg-gray-200">
+    <div class="p-6 bg-white">
+        <h1 class="text-xl font-bold">Kullanıcı listesi get</h1>
+        <div>
+            <input id="search-input" type="text" placeholder="isim ille arama" class="p-2 border">
+        </div>
+        <button id="btn-load" class="p-2 bg-blue-200 mb-4">Listeyi yükle</button>
+        <ul id="user-list" class="list-disc pl-2 space-y-1">
+            <li>Henüz Ali hocam yapamadı</li>
+        </ul>
+    </div>
+    <script>
+        let tumKullanicilar = [];
+        const yedekKullanicilar = [
+            { "id": 1, 'name': 'Ali yilmaz', 'email': 'ali@gmail.com', 'sehir': 'çorum' },
+            { "id": 1, 'name': 'ece yilmaz', 'email': 'ece@gmail.com', 'sehir': 'istanbul' },
+            { "id": 1, 'name': 'ezgi yilmaz', 'email': 'ezgi@gmail.com', 'sehir': 'adana' },
+            { "id": 1, 'name': 'onur yilmaz', 'email': 'onur@gmail.com', 'sehir': 'hatay' },
+        ];
+
+        const listeyiCiz = (kullanıcılar) => {
+            const listElement = document.getElementById('user-list');
+            listElement.innerHTML = '';
+            if (kullanıcılar.length === o) {
+                listElement.innerHTML = '<li>Eşlenen kullanıcı bulunanmadı</li>';
+                return;
+            }
+
+            kullanıcılar.forEach(user => {
+                const li = document.createElement('li');
+                li.innerHTML = `<strong>${user.name}</strong> - E-posta: ${user.email} (şehir:${user.sehir})`;
+                listElement.appendChild(li);
+
+            });
+        }
+
+        const kullanicilariYukle = async () => {
+            const listElement = document.getElementById('user-list');
+            listElement.innerHTML = '<li>kullanıcılar yükleniyorç...............</li>';
+
+            try {
+                const response = await fetch("https://kodusta.com/api/kullanicilar.json");
+                if (!response.ok) {
+                    throw new Error('sunucu hatası ' + response.status);
+                }
+
+                tumKullanicilar = await response.json();
+            } catch (hata) {
+                console.warn('CORS engeli veya bağlantı hatası, yedek');
+                tumKullanicilar.yedekKullanicilar;
+            }
+            listeyiCiz(tumKullanicilar);
+        }
+
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            const aramaKelimesi = e.target.value.toLowerCase();
+            const filtrelenmis = tumKullanicilar.filter(user => user.name.toLowerCase().includes(aramaKelimesi));
+            listeyiCiz(filtrelenmis);
+        })
+        document.getElementById('btn-load').addEventListener('click', kullanicilariYukle);
+    </script>
+</body>
+
+</html>

@@ -37,7 +37,7 @@
 
         const siparisSureciniTonet=async()=>{
             const output = document.getElementById('result');
-            output = innerText=`süreç başladı....`
+            output.innerText='süreç başladı....';
 
             const kullanici = await kullaniciGetir();
             output.innerText=`Kullanıcı alındı:${kullanici.ad}\n sepet yukleniyor`;
