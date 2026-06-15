@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Personel CRM Paneli - Detaylı Teknik Sunum Raporu</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f1f5f9;
+      color: #334155;
+      line-height: 1.7;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 50px;
+      border-radius: 12px;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -4px rgba(0,0,0,0.05);
+    }
+    h1 {
+      color: #0f172a;
+      border-bottom: 4px solid #0284c7;
+      padding-bottom: 15px;
+      margin-bottom: 35px;
+      font-size: 32px;
+      font-weight: 800;
+    }
+    h2 {
+      color: #0369a1;
+      margin-top: 40px;
+      font-size: 22px;
+      border-left: 5px solid #0284c7;
+      padding-left: 12px;
+      font-weight: 700;
+    }
+    h3 {
+      color: #0f172a;
+      font-size: 16px;
+      margin-top: 20px;
+      margin-bottom: 5px;
+    }
+    p {
+      margin-bottom: 15px;
+      color: #475569;
+    }
+    ul {
+      margin-left: 25px;
+      margin-bottom: 25px;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    strong {
+      color: #0f172a;
+    }
+    code {
+      font-family: 'Consolas', 'Courier New', monospace;
+      background-color: #f8fafc;
+      color: #0f172a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 14px;
+      border: 1px solid #e2e8f0;
+    }
+    .code-block {
+      background-color: #0f172a;
+      color: #f8fafc;
+      padding: 20px;
+      border-radius: 8px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 14px;
+      overflow-x: auto;
+      margin: 15px 0;
+      border-left: 5px solid #38bdf8;
+    }
+    .comment { color: #64748b; font-style: italic; }
+    .keyword { color: #f472b6; }
+    .function { color: #38bdf8; }
+    .string { color: #34d399; }
+    .footer {
+      margin-top: 50px;
+      padding-top: 25px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 14px;
+      color: #94a3b8;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Personel CRM Paneli Teknik Mimari ve Kod Analiz Sunumu</h1>
+    <p>Bu doküman, React.js ve Vite mimarisi kullanılarak geliştirilen Single Page Application (SPA) tabanlı Personel Yönetim Paneli'nin iş mantığını, veri akışını ve kritik fonksiyonlarının derinlemesine satır analizi içermektedir [1, 2].</p>
+
+    <h2>1. Dinamik Form Yönetimi ve Doğrulama Mekanizmaları</h2>
+    
+    <h3>A. handleInputChange Fonksiyonu Analizi</h3>
+    <p>Uygulamada her girdi alanı için ayrı fonksiyon yazmak yerine, tüm form akışını tek başına sırtlayan reaktif bir metot kullanılmıştır.</p>
+    
+    <div class="code-block">
+<span class="keyword">const</span> <span class="function">handleInputChange</span> = (e) => {
+  <span class="keyword">const</span> { name, value, type, checked } = e.target;
+  <span class="keyword">const</span> guncelDeger = type === <span class="string">"checkbox"</span> ? checked : value;
+
+  <span class="function">setForm</span>(prev => ({ ...prev, [name]: guncelDeger }));
+};</div>
+
+    <ul>
+      <li><strong>Esnek Veri Yakalama:</strong> <code>e.target</code> üzerinden nesne parçalama (destructuring) yöntemiyle input bileşeninin tüm ayırt edici nitelikleri tek satırda ayrıştırılır.</li>
+      <li><strong>Tipe Göre Değer Atama:</strong> Metinsel alanlar için <code>value</code> niteliği okunurken, aktiflik durumu ve stajyerlik gibi mantıksal alanlar için <code>checked</code> (true/false) durumu dinamik olarak seçilir.</li>
+      <li><strong>Dinamik Anahtar Atama (Computed Property):</strong> <code>[name]</code> ifadesi sayesinde, HTML tarafındaki inputun ismi ne ise state nesnesi içindeki ilgili alan hedef alınır (Örn: <code>name="eposta"</code> ise doğrudan eposta güncellenir).</li>
+      <li><strong>Durum Koruma (Spread Operator):</strong> <code>...prev</code> ifadesi, React'in state'i tamamen ezme huyunu engeller; kullanıcının ad yazarken soyadı veya telefon bilgisini kaybetmemesini garanti altına alır.</li>
+    </ul>
+
+    <h3>B. formDogrula Fonksiyonu Analizi</h3>
+    <p>Veritabanı güvenliği ve tutarlılığı için veriler üst bileşene gönderilmeden önce istemci tarafında sıkı bir denetime tabi tutulur.</p>
+
+    <div class="code-block">
+<span class="keyword">const</span> <span class="function">formDogrula</span> = () => {
+  <span class="keyword">const</span> yeniHatalar = {};
+  <span class="keyword">if</span> (form.ad.trim().length &lt; 2) yeniHatalar.ad = <span class="string">"Ad en az 2 karakter olmalıdır."</span>;
+  <span class="keyword">if</span> (form.soyad.trim().length &lt; 2) yeniHatalar.soyad = <span class="string">"Soyad en az 2 karakter olmalıdır."</span>;
+  <span class="keyword">if</span> (!form.eposta.includes(<span class="string">"@"</span>)) yeniHatalar.eposta = <span class="string">"Geçerli bir e-posta giriniz."</span>;
+
+  <span class="function">setHatalar</span>(yeniHatalar);
+  <span class="keyword">return</span> Object.keys(yeniHatalar).length === 0;
+};</div>
+
+    <ul>
+      <li><strong>Boşluk Manipülasyon Engeli:</strong> <code>.trim()</code> metodu metnin başındaki ve sonundaki boşlukları temizler. Kullanıcının sadece space tuşuna basarak zorunlu alanları geçmesi engellenir.</li>
+      <li><strong>Hata Nesnesi Yönetimi:</strong> Hatalar anlık olarak yerel bir nesnede toplanır. Formun geçerlilik durumu tek bir mantıksal kontrole bağlanır: Nesne anahtar sayısı (<code>Object.keys</code>) sıfır ise form hatasızdır.</li>
+    </ul>
+
+    <h2>2. Durum (State) Yönetimi ve CRUD Algoritmaları</h2>
+
+    <h3>A. handleKaydet Fonksiyonu Analizi</h3>
+    <p>Aynı arayüz bileşeninin hem yeni veri ekleme hem de var olan veriyi güncelleme yeteneğine sahip olmasını sağlayan polimorfik yapıdır.</p>
+
+    <div class="code-block">
+<span class="keyword">const</span> <span class="function">handleKaydet</span> = () => {
+  <span class="keyword">if</span> (duzenlenenId) {
+    <span class="comment">// Güncelleme İşlemi</span>
+    <span class="function">setPersoneller</span>(prev => prev.map(p => p.id === duzenlenenId ? { ...form, id: duzenlenenId } : p));
+    <span class="function">setDuzenlenenId</span>(<span class="keyword">null</span>);
+  } <span class="keyword">else</span> {
+    <span class="comment">// Yeni Kayıt İşlemi</span>
+    <span class="function">setPersoneller</span>(prev => [...prev, { ...form, id: Date.now() }]);
+  }
+  <span class="function">setForm</span>(bosForm);
+};</div>
+
+    <ul>
+      <li><strong>ID Kontrollü Dallanma:</strong> <code>duzenlenenId</code> durumunun doluluğuna göre algoritma yön değiştirir. State doluysa güncelleme, boşsa ekleme prosedürü işletilir.</li>
+      <li><strong>Dizi Haritalama ile Güncelleme (.map):</strong> Liste taranır; sadece güncellenmek istenen ID ile eşleşen elemanın içi form verileriyle değiştirilir, diğer personeller (<code>: p</code>) listede orijinal haliyle bırakılır.</li>
+      <li><strong>Zaman Damgalı Benzersiz Kimlik:</strong> Yeni kayıtlarda <code>Date.now()</code> kullanılarak milisaniye hassasiyetinde asla çakışmayacak yerel kimlik numaraları (ID) üretilir.</li>
+    </ul>
+
+    <h3>B. filtrelenmişPersoneller Algoritması Analizi</h3>
+    <p>Uygulamanın performansını doğrudan etkileyen, ham veriyi bozmadan çalışan çalışma zamanı (runtime) süzgecidir.</p>
+
+    <div class="code-block">
+<span class="keyword">const</span> filtrelenmişPersoneller = personeller.filter(p => {
+  <span class="keyword">const</span> tamAd = <span class="string">`</span>${p.ad} ${p.soyad}<span class="string">`</span>.toLowerCase();
+  <span class="keyword">const</span> metinEslesti = tamAd.includes(aramaMetni.toLowerCase()) || p.rol.toLowerCase().includes(aramaMetni.toLowerCase());
+  <span class="keyword">const</span> departmanEslesti = seciliDepartman === <span class="string">"Tümü"</span> || p.departman === seciliDepartman;
+  <span class="keyword">const</span> aktifEslesti = !sadeceAktif || p.aktif;
+
+  <span class="keyword">return</span> metinEslesti && departmanEslesti && aktifEslesti;
+});</div>
+
+    <ul>
+      <li><strong>Veri Mutasyonunun Önlenmesi (Immutability):</strong> Kullanıcı arama yaptıkça ana dizi temizlenmez. Sadece o render anına özel sanal bir liste süzülür. Arama temizlendiğinde veri kaybı olmadan eski liste ekrana döner.</li>
+      <li><strong>Büyük/Küçük Harf Standardizasyonu:</strong> Kullanıcı girdileri ve personel isimleri <code>.toLowerCase()</code> ile eşitlenerek dil kaynaklı arama uyuşmazlıkları çözülür.</li>
+      <li><strong>Seçmeli Checkbox Mantığı:</strong> <code>!sadeceAktif || p.aktif</code> yapısı kısa devre değerlendirmesi (short-circuit) kullanır. Filtre aktif değilse pas geçilir, aktifse personelin true olması zorunlu kılınır.</li>
+    </ul>
+
+    <h3>C. handleSil Fonksiyonu Analizi</h3>
+    <p>Verilerin güvenli ve React felsefesine uygun olarak bellekten uzaklaştırılmasını sağlar.</p>
+
+    <div class="code-block">
+<span class="keyword">const</span> <span class="function">handleSil</span> = (id) => {
+  <span class="keyword">if</span> (window.confirm(<span class="string">"Bu personeli silmek istediğinize emin misiniz?"</span>)) {
+    <span class="function">setPersoneller</span>(prev => prev.filter(p => p.id !== id));
+  }
+};</div>
+
+    <ul>
+      <li><strong>Onay Mekanizması:</strong> <code>window.confirm</code> tarayıcı seviyesinde bir bariyer oluşturarak yanlışlıkla tıklamalarda veri kaybı yaşanmasını önler.</li>
+      <li><strong>Filtreleme ile Ayıklama (.filter):</strong> Silme işlemi diziden eleman koparmak (splice) yerine, silinmek istenen ID haricindeki tüm elemanları yeni bir diziye kopyalayarak yapılır. Eşleşen ID süzgecin dışında kalır ve bellekten düşer.</li>
+    </ul>
+
+    <div class="footer">
+      Softito Yazılım Akademisi • Dönem Projesi Teknik Rapor Sayfası [2]
+    </div>
+  </div>
+
+</body>
+</html>
