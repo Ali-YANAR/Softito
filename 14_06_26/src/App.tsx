@@ -1,18 +1,15 @@
-
-
 import './App.css'
 
-function App() {
- 
-
+function App() { 
   return (
     <>
     <div className=''>
-      <h3>Ürün arama ve depolama</h3>
+      <h3 className='text-tx font-bold'>
+        Ürün arama ve depolama</h3>
       <div>
           <input className='' type="text" placeholder='Urun adi ara...' /> 
       </div>
-      <div>
+      <div className='flex flex-col'>
         <button>Tümü</button>
         <button>Aksesuar</button>
         <button>Ekran</button>
@@ -28,13 +25,14 @@ function App() {
       <div>
           <h3>Sepetiniz</h3>
           <p>Ürün adı gelecek</p>
-          <p>Ürün Fiyatı gelecek</p>
+          <p>Fiyar : Ürün Fiyatı gelecek</p>
           <button> - </button>
-          <label>1</label>
+          <label>Urun Adeti</label>
           <button> + </button>
+          <button>Sil</button>
           <hr /> 
 
-        <p>Toplam Tutar:TL</p>
+        <p>Toplam Tutar: Toplam FiyatTL</p>
         <button>Temizle</button>
         <button>Satın Al</button>
 
