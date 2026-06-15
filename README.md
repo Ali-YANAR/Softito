@@ -26,7 +26,8 @@ yarn global remove create-react-app
 Terminalinizde projenizin olduğu klasörün içinde olduğunuzdan emin olun ve şu komutu çalıştırarak gerekli paketleri npm ile indirin:
 
 
-npm install -D tailwindcss postcss autoprefixer
+
+npm install @tailwindcss/vite tailwindcss
 
 => çalıştırmak için :   npm run dev
 
@@ -58,3 +59,5 @@ eklentiler
 
 Simple React Snippets
 ES7+ React/Redux/React-Native snippets
+
+https://soft-ito-wheel-and-write.vercel.app/?role=student
