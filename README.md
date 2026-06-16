@@ -11,12 +11,14 @@ kurulu olması gerekli
 
 npm create vite@latest ilk-ders -- --template react
 
-npx create vite@latest ilk-ders --template react
+npx create vite@latest ecommerce --template react
 
 #bu kurulum garanti olan sonunda ki ts ise typescript ile kurulmasını sağlıyor 
 # terminalde nerede oluşacak ise proje oraya geçilip kod çalıştırılır.
 npm create vite@latest proje_adi -- --template react-ts
 
+sınıfta kurulacak 
+npm create vite@latest ecommerce -- --template react
 
 Projeyi silmek
 rm -rf proje-adi
