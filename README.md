@@ -69,6 +69,12 @@ ES7+ React/Redux/React-Native snippets
 #projeye ilk başlarken sıralama
 # terminalde nerede oluşacak ise proje oraya geçilip kod çalıştırılır.
 npm create vite@latest 14_06_26 -- --template react-ts
+
+# kursta kurarken ******** js ile kur
+npm create vite@latest ilk-ders -- --template react
+
+
+
 # ikinci olarak  Tailwind CSS v4'ü entegre etmektir
 # 1. En son sürüm Tailwind CSS ve resmi Vite eklentisini indirin
 npm install tailwindcss @tailwindcss/vite
