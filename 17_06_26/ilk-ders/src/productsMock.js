@@ -6,7 +6,6 @@ export const MOCK_PRODUCTS = [
     category: "Telefon",
     rating: 4.8,
     ratingCount: 124,
- 
     image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
     description: "Titanyum tasarımı, A17 Pro çipi ve gelişmiş kamera sistemiyle en güçlü iPhone."
   },
@@ -17,7 +16,6 @@ export const MOCK_PRODUCTS = [
     category: "Telefon",
     rating: 4.7,
     ratingCount: 89,
-    
     image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
     description: "Galaxy AI entegrasyonu, 200 MP kamera ve S-Pen desteği ile sınırları zorlayın."
   },
@@ -84,3 +82,30 @@ export const MOCK_PRODUCTS = [
 ];
 
 export const MOCK_CATEGORIES = ["Tümü", "Telefon", "Bilgisayar", "Aksesuar", "Moda", "Ev & Yaşam"];
+
+export const ABOUT_DATA = {
+  subtitle: "Biz Kimiz?",
+  title: "n11clone Hakkında",
+  text1: "n11clone, Türkiye'nin lider e-ticaret platformlarından n11'den ilham alarak geliştirilmiş, alıcılar ile satıcıları buluşturan yenilikçi ve güvenilir bir alışveriş pazaryeri prototipidir.",
+  text2: "Amacımız, kullanıcılara en yeni teknolojileri ve şık tasarım standartlarını sunarak kusursuz bir e-ticaret deneyimi sağlamaktır. Modern bileşen mimarimiz ve optimize edilmiş veri yönetimi modellerimiz ile geleceğin alışveriş altyapısını bugünden inşa ediyoruz.",
+  values: [
+    { title: "Güvenilirlik", desc: "Ödeme ve veri güvenliğinde en üst düzey standartları benimsiyoruz." },
+    { title: "Yenilikçilik", desc: "Modern web teknolojilerini takip ederek sürekli gelişim sağlıyoruz." },
+    { title: "Kullanıcı Odaklılık", desc: "Kullanıcılarımızın geri bildirimlerini dinliyor ve önemsiyoruz." }
+  ]
+};
+
+export const FAQ_DATA = [
+  {
+    q: "Siparişim ne zaman kargolanır?",
+    a: "Satıcılarımız siparişlerinizi genellikle 24 saat içerisinde kargoya teslim eder. Kargo takip bilgileri e-posta adresinize gönderilir."
+  },
+  {
+    q: "İade sürecini nasıl başlatırım?",
+    a: "Hesabım sayfasındaki Siparişlerim alanından ilgili ürünü seçerek 'İade Talebi Oluştur' butonuna basabilir ve ücretsiz kargo kodunuzu alabilirsiniz."
+  },
+  {
+    q: "Ödeme seçenekleri nelerdir?",
+    a: "Tüm kredi kartları, banka kartları ve BKM Express aracılığıyla güvenli ödeme yapabilirsiniz. Taksit seçenekleri ürün sayfasında gösterilmektedir."
+  }
+];

@@ -3,16 +3,25 @@ import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import ProductGrid from "./components/ProductGrid";
 import Footer from "./components/Footer";
+import { useState } from "react";
 import AddProductForm from "./components/AddProductForm";
 import { MOCK_PRODUCTS, MOCK_CATEGORIES } from "./productsMock";
-import { useState } from "react";
- 
+import AboutUs from "./components/AboutUs";
+import HelpCenter from "./components/HelpCenter";
+import OrderTracking from "./components/OrderTracking";
+import ProductReturns from "./components/ProductReturns";
+import CategoriesList from "./components/CategoriesList";
+import ProductDetail from "./components/ProductDetail";
+import CartDrawer from "./components/CartDrawer";
+import LoginModal from "./components/LoginModal";
+
 function App() {
   const [products, setProducts] = useState(MOCK_PRODUCTS);
   const [selectedCategory, setSelectedCategory] = useState("Tümü");
   const [view, setView] = useState("home");
   const [searchQuery, setSearchQuery] = useState("");
   const [searchInput, setSearchInput] = useState("");
+  const [isLoginOpen, setIsLoginOpen]=useState(false);
 
   const handleAddProduct=(data)=>{
     const newProduct={
@@ -86,7 +95,7 @@ function App() {
 
             {filteredProducts.length === 0 ? (
               <div className="text-center py-10">
-                <p className="text-red-500">
+                <p className="text-red-900">
                   Aradığınız kriterlere uygun ürün bulunamadı.
                 </p>
               </div>
@@ -100,6 +109,20 @@ function App() {
         setView={setView} onAddProduct={handleAddProduct}
         />
       )}
+      <ProductDetail />
+     <CategoriesList categories={MOCK_CATEGORIES}
+     products = {products}
+    
+     />
+      <AboutUs/>
+      <HelpCenter/>
+      <OrderTracking/>
+      <ProductReturns/>
+      <CartDrawer />
+      <LoginModal isOpen={isLoginOpen} 
+      onClose={()=>setIsLoginOpen(false)}
+      />
+
       <Footer />
     </>
   );
