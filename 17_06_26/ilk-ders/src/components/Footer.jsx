@@ -13,8 +13,8 @@ export default function Footer(setView,setSelectedCategory){
                 <h3 className="footer-link" onClick={()=>setView("about")}>Kariyer</h3>
                 <h3 className="footer-link" onClick={()=>setView("help")}>İletişim</h3> 
             </div>
-            <div className="footer-section">
-                <h3 className="footer-title">Kategoriler</h3>
+            <div className="footer-section" >
+                <h3 className="footer-link"  onClick={()=>setView('categories')}>Kategoriler</h3>
                 <h3 className="footer-link" onClick={()=>handleCategoryLink("Telefon")}>Telefon</h3>
                 <h3 className="footer-link" onClick={()=>handleCategoryLink("Aksesuar")}>Aksesuar</h3>
                 <h3 className="footer-link" onClick={()=>handleCategoryLink("Bilgisayar")}>Bilgisayar</h3> 

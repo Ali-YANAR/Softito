@@ -15,14 +15,14 @@ export default function CategoriesList({
     <>
       <main className="container">
         <div className="container-header">
-          <h1 className="page-title">Tüm Kategoriler</h1>
+          <h1 className="page-title" >Tüm Kategoriler</h1>
         </div>
         <div className="categories-grid">
           {categoriesWithCount.map((cat) => (
             <div
               key={cat.name}
               className="category-card"
-              onClick={onCategoryClick(cat.name)}
+              onClick={()=>onCategoryClick(cat.name)}
             >
               <div className="category-icon-box">
                 <span>{cat.name.substring(0,1)}</span>
