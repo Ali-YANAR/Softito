@@ -1,0 +1,114 @@
+TYPESCRIPT VE NESNEYE YÖNELİK TİPLEME DERS NOTLARI
+
+=========================================
+SABAH BÖLÜMÜ: TYPESCRIPT TEMELLERİ VE TİP YAPILARI
+=========================================
+
+1. TYPESCRIPT NEDİR VE NEDEN KULLANILIR?
+TypeScript, JavaScript'e statik tip tanımlama özellikleri ekleyen ve Microsoft tarafından geliştirilen bir JavaScript üst kümesidir (superset). Tarayıcılar doğrudan TypeScript kodunu çalıştıramaz; bu yüzden TS kodları derlenerek (transpile) JavaScript'e dönüştürülür.
+TypeScript'in faydaları:
+- Hata Önleme: Tip uyumsuzlukları ve yazım hataları daha kod yazım (derleme) aşamasında fark edilir.
+- Autocomplete (Otomatik Tamamlama): Nesnelerin hangi özelliklere sahip olduğunu bildiği için editör kod yazımını kolaylaştırır.
+- Büyük Ölçekli Projeler: Kodun okunabilirliğini ve refactor edilebilirliğini artırır.
+
+
+2. TEMEL TİP BİLDİRİMLERİ (BASIC TYPES)
+TypeScript'te değişkenlerin hangi türde veri tutacağı `:` işaretiyle belirtilir:
+- Primitive Types: `string` (metin), `number` (sayı), `boolean` (true/false).
+  let ogrenciAdi: string = "Ahmet";
+  let yas: number = 25;
+  let mezunMu: boolean = false;
+
+
+3. DİZİLER VE TUPLE YAPILARI
+- Diziler (Arrays): Belirli bir tipteki verileri saklar. İki şekilde yazılabilir:
+  let notlar: number[] = [85, 90, 75]; // veya Array<number>
+- Tuples (Demetler): Eleman sayısı ve eleman sırasındaki veri tipleri sabit olan özel dizilerdir.
+  let ogrenciSkor: [string, number] = ["Ayşe", 98]; // ilk eleman string, ikinci eleman number olmak zorundadır.
+
+
+=========================================
+ÖĞLEDEN SONRA BÖLÜMÜ: FONKSİYONLAR, ARABİRİMLER VE GENERICS
+=========================================
+
+1. FONKSİYONLARDA TİP BİLDİRİMLERİ
+Fonksiyonların alacağı parametrelerin tipleri ve fonksiyonun geriye döndüreceği değerin tipi tanımlanır. Değer döndürmeyen fonksiyonların tipi `void` olarak belirlenir:
+function topla(sayi1: number, sayi2: number): number {
+    return sayi1 + sayi2;
+}
+const yazdir = (mesaj: string): void => {
+    console.log(mesaj);
+};
+
+
+2. ARABİRİM (INTERFACE) YAPISI VE SEÇENEKLERİ
+`Interface`, nesnelerin uyması gereken şablonları (sözleşmeleri) tanımlar.
+- Readonly Özelliği: Nesne oluşturulduktan sonra değeri değiştirilemeyen sadece okunabilir özelliklerdir.
+- Optional (Seçenekli) Özellikler: Tanımlanması zorunlu olmayan özelliklerdir, sonuna `?` konularak belirtilir.
+
+Örnek Interface Tanımı:
+interface Musteri {
+    readonly id: number; // değiştirilemez
+    ad: string;
+    telefon?: string; // opsiyonel
+}
+
+
+3. JENERİK (GENERICS) YAPISI
+Fonksiyonların, sınıfların veya interface'lerin tek bir tipe bağlı kalmadan, çağrıldıkları andaki dinamik tiplerle çalışabilmesini sağlayan esnek yapıdır. Tip güvenliğini kaybetmeden tekrar kullanılabilirlik sağlar.
+- Generic Fonksiyon:
+  function ilkEleman<T>(dizi: T[]): T {
+      return dizi[0];
+  }
+  (Bu fonksiyon hem `number[]` hem `string[]` ile çağrılabilir ve geriye çağrıldığı tipi döndürür.)
+- Generic Sınıflar:
+  class Depo<T> {
+      private veri: T[] = [];
+      ekle(oge: T) { this.veri.push(oge); }
+  }
+
+
+=========================================
+ÖZET TABLO: HANGİ KAVRAM NE İŞE YARAR?
+=========================================
+
+1. TYPESCRIPT TİP KELİMELERİ:
+- Tuple                  : Eleman sayısı ve tiplerinin sırası önceden belirlenmiş özel dizi türü.
+- void                   : Fonksiyonun geriye herhangi bir değer döndürmediğini belirten tip.
+- Interface              : Nesnelerin veri yapısını belirleyen şablon tanımı.
+- readonly               : Sadece ilk tanımlamada atanan ve sonradan değiştirilemeyen değişken özelliği.
+
+2. İLERİ TYPESCRIPT KAVRAMLARI:
+- Jenerik (Generics)     : Kod bloklarının dinamik ve tip güvenli olarak farklı veri tipleriyle çalışabilmesi.
+- T                       : Generics yapılarında kullanılan genel tip yer tutucu (Type placeholder) harfi.
+- Transpiler             : TypeScript kodunu tarayıcının anlayacağı JavaScript koduna çeviren derleyici.
+
+=========================================
+TEMEL UYGULAMA VE PRATİK KAZANIMLARI
+=========================================
+
+1. TEMEL TİPLEME VE TUPLE KULLANIMI:
+- Öğrenci kayıt ekranında yaş ve isim alanları tipleştirildi (`index.html`).
+- Öğrencinin adını ve notunu demet halinde tutan Tuple yapıları listelendi (`index2.html`).
+
+2. FONKSİYON VE INTERFACE KULLANILAN UYGULAMALAR:
+- Matematiksel toplama ve birleştirme fonksiyonları tip güvenli hale getirildi (`index3.html`).
+- E-Ticaret ürün nesnesi için `Product` interface'i yazılarak tip denetimi yapıldı (`index4.html`).
+- Müşteri kartında `readonly` ve opsiyonel `telefon?` alanları test edildi (`index5.html`).
+
+3. GENERICS KULLANIMI:
+- Dizi türünden bağımsız olarak çalışan `getFirstElement<T>` fonksiyonu yazıldı (`index6.html`).
+- Hem metin deposu hem de sayı deposu olarak ayrı ayrı üretilebilen generic `Storage<T>` sınıfı oluşturuldu (`index7.html`).
+
+=========================================
+PROJEDE KULLANILAN METOT VE ARAÇLARIN AÇIKLAMALARI
+=========================================
+
+- **typescript.js:** Tarayıcı tarafında dinamik derleme yapabilmek için sayfaya dahil edilen TS derleyicisidir.
+  *Kullanımı:* HTML sayfalarındaki `<script type="text/typescript">` etiketlerini canlı JS'e çevirmede.
+
+- **readonly id: number:** Interface içinde kimlik (id) alanını salt-okunur yapar.
+  *Kullanımı:* Müşteri veya ürün kimliğinin yanlışlıkla değiştirilmesini engellemede.
+
+- **T[]:** Jenerik fonksiyon veya sınıfta gelen elemanın bir dizi olduğunu belirtir.
+  *Kullanımı:* Generic depo ve generic eleman çekme fonksiyonlarında parametre tipi olarak.

@@ -1,0 +1,121 @@
+REACT GİRİŞ VE BILEŞEN MANTIĞI DERS NOTLARI
+
+=========================================
+SABAH BÖLÜMÜ: REACT GİRİŞ VE İLK PROJENİN OLUŞTURULMASI (VITE)
+=========================================
+
+1. REACT VE SPA (SINGLE PAGE APPLICATION) NEDİR?
+React, Facebook tarafından geliştirilen, kullanıcı arayüzleri oluşturmaya yarayan açık kaynaklı bir JavaScript kütüphanesidir.
+- SPA (Tek Sayfa Uygulaması): Tarayıcının her sayfa geçişinde tüm sayfayı yeniden yüklemesi yerine, sadece değişen kısımların dinamik olarak güncellenmesi felsefesidir.
+- Virtual DOM (Sanal DOM): Gerçek DOM üzerinde doğrudan işlem yapmak yavaş olduğu için React, bellekte sanal bir kopyasını tutar. Değişiklikleri önce burada hesaplar, ardından gerçek DOM'a sadece değişen kısımları yansıtır (Reconciliation).
+
+
+2. VITE İLE PROJE OLUŞTURMA VE DOSYA YAPISI
+Vite, son derece hızlı çalışan modern bir frontend derleme ve geliştirme aracıdır.
+Proje yapısı:
+- package.json    : Projenin bağımlılıklarını (React, ReactDOM vb.) ve çalıştırılacak script'leri barındırır.
+- vite.config.js  : Vite'in konfigürasyon dosyası.
+- index.html      : Uygulamanın tarayıcıya sunulan tek gerçek HTML sayfası. İçindeki `<div id="root"></div>` etiketine React uygulaması bağlanır.
+- src/main.jsx    : React uygulamasını başlatan ve `App` bileşenini DOM'daki `root` alanına bağlayan (render) giriş noktası.
+- src/App.jsx     : Ana bileşenimizdir; diğer tüm alt bileşenler burada birleştirilir.
+
+
+3. JSX (JAVASCRIPT XML) VE KURALLARI
+JavaScript dosyaları içinde HTML benzeri etiketler yazmamızı sağlayan bir sözdizimi uzantısıdır.
+JSX Kuralları:
+- Tek bir ata etiket (Parent) dönmek zorundadır. Birden fazla etiketi sarmalamak için `<React.Fragment>` veya boş etiketler `<>` kullanılır.
+- HTML'deki `class` niteliği yerine `className` kullanılır.
+- Tüm etiketlerin kapatılması zorunludur (`<img />`, `<input />` gibi kendi kendine kapanan etiketler dahil).
+- Süslü parantezler `{}` içinde JavaScript ifadeleri yazılabilir (örneğin: `{degisken}`, `{1 + 1}`).
+- Satır içi stiller nesne (Object) olarak geçilir: `style={{ color: "red" }}`.
+
+
+=========================================
+ÖĞLEDEN SONRA BÖLÜMÜ: COMPONENT, PROPS VE ETKİLEŞİM TEMELLERİ
+=========================================
+
+1. COMPONENT (BİLEŞEN) YAPISI
+React uygulamaları bağımsız, yeniden kullanılabilir ve modüler parçalardan (Component) oluşur.
+- React bileşen isimleri her zaman **BÜYÜK HARFLE** başlamak zorundadır.
+- Genellikle bir JSX döndüren standart JavaScript fonksiyonlarıdır:
+  function Kart() {
+      return <div className="card">İçerik</div>;
+  }
+
+
+2. PROPS (PROPERTIES) MANTIĞI VE KURALLARI
+Bileşenlere dışarıdan veri göndermek için kullanılan parametrelerdir. HTML özniteliklerine (attributes) benzerler.
+- Salt Okunurdur (Read-Only): Bir bileşen kendisine gelen prop'ları doğrudan değiştiremez (immutable). Prop'lar yukarıdan aşağıya (tek yönlü veri akışı - unidirectional data flow) akar.
+- Default Props: Bileşene prop gönderilmediği durumlarda devreye giren varsayılan değerlerdir.
+  function Selam({ ad = "Misafir" }) { ... } (ES6 default parametre yöntemiyle).
+
+
+3. PROPS.CHILDREN VE COMPOSITION (BİLEŞİM)
+Bileşenlerin içerisine yerleştirilen alt etiketleri yakalamak için `props.children` kullanılır. Bu sayede kapsayıcı (Wrapper) bileşenler tasarlanabilir:
+function Kutu({ children }) {
+    return <div className="border p-4">{children}</div>;
+}
+// Kullanımı: <Kutu><p>İçerik metni</p></Kutu>
+
+
+4. KOŞULLU VE LİSTE RENDERING
+- Koşullu Render: Ternary operatörü (`koşul ? Evet : Hayır`) veya short-circuit (`koşul && Element`) kullanılarak arayüzün duruma göre şekillenmesi sağlanır.
+- Liste Render: JavaScript `map()` metodu ile diziler döngüye alınarak JSX elemanları oluşturulur.
+  *Önemli Kural:* `map` içindeki en dış elemana benzersiz bir `key` prop'u verilmelidir. React, liste güncellendiğinde hangi elemanın değiştiğini anlamak için bu anahtarı kullanır.
+
+
+5. EVENT HANDLING (OLAY YÖNETİMİ)
+React'te olay adları deve hörgücü (camelCase) olarak yazılır (`onClick`, `onSubmit`).
+- Doğru Kullanım: Fonksiyon referansı geçilir: `onClick={tiklamaYoneticisi}`.
+- Yanlış Kullanım: Fonksiyon anında çağrılırsa sayfa yüklenirken sonsuz döngüye girer: `onClick={tiklamaYoneticisi()}`.
+
+
+=========================================
+ÖZET TABLO: HANGİ KAVRAM NE İŞE YARAR?
+=========================================
+
+1. REACT BİLEŞEN KAVRAMLARI:
+- Component                : Yeniden kullanılabilir arayüz parçacığı (Büyük harfle başlar).
+- JSX                      : JavaScript içinde HTML yazmayı sağlayan sözdizimi.
+- className                : JSX içinde CSS sınıfları eklemek için kullanılan nitelik.
+- React.Fragment (<></>)   : DOM'a fazladan etiket eklemeden birden çok elementi gruplama aracı.
+
+2. VERİ VE ETKİLEŞİM KAVRAMLARI:
+- props                    : Üst bileşenden alt bileşene aktarılan salt-okunur veri parametreleri.
+- children                 : Bileşen etiketlerinin arasına yazılan etiketleri temsil eden özel prop.
+- key                      : Liste render edilirken React'in performans optimizasyonu için kullandığı benzersiz değer.
+- defaultProps             : Gönderilmeyen propların yerine geçecek yedek değerler.
+
+=========================================
+TEMEL UYGULAMA VE PRATİK KAZANIMLARI
+=========================================
+
+1. VITE OLUŞTURMA VE JSX DENEMELERİ:
+- Vite projesi başlatılarak JSX yapısındaki süslü parantez içi ifadeler ve CSS className testleri yapıldı (`Demo1JSXBasic.jsx`).
+
+2. BİLEŞEN PARÇALAMA VE PROPS KULLANIMI:
+- Header, Footer gibi bağımsız bileşenler tanımlanarak ana uygulamada birleştirildi (`Demo2Component.jsx`).
+- Alt bileşenlere isim, fiyat, stok gibi veriler prop olarak aktarıldı ve ekrana yazdırıldı (`Demo3PropsBasic.jsx`).
+- Props'ların salt okunur (read-only) yapısı test edildi ve doğrudan değiştirilemeyeceği kanıtlandı (`Demo8ReadOnlyProps.jsx`).
+
+3. COMPOSITION VE LİSTE/KOŞULLU RENDERING:
+- Kapsayıcı kart bileşeni oluşturulup `children` prop'u ile içerik sarmalandı (`Demo4PropsChildren.jsx`).
+- Stok durumuna göre "Tükendi" veya "Stokta Var" gibi koşullu render alanları geliştirildi (`Demo5ConditionalRendering.jsx`).
+- Ürünler dizisi `map` edilerek liste render yapıldı ve `key` parametreleri atandı (`Demo6ListRendering.jsx`).
+- `Demo7EventHandling.jsx` ile parametreli ve parametresiz olay yönetim fonksiyonları test edildi.
+
+=========================================
+PROJEDE KULLANILAN KLASİK YER YER ALAN AÇIKLAMALARI
+=========================================
+
+- **npm run dev:** Vite projesini yerel sunucuda (localhost) başlatan komuttur.
+  *Kullanımı:* Kod yazarken tarayıcıda canlı görmek için çalıştırılır.
+
+- **props.children:** Bir bileşenin açılış ve kapanış etiketleri arasındaki her şeyi yakalar.
+  *Kullanımı:* Tasarım şablonlarında (Card, Modal vb.) gövde içeriğini yerleştirmede.
+
+- **key={urun.id}:** `map` döngüsündeki her bir öğeyi ayırt etmek için benzersiz kimlik atar.
+  *Kullanımı:* React'in sanal DOM güncellemelerinde sadece değişen ürünü yeniden çizmesi için.
+
+- **onClick={() => handlesClick(id)}:** Parametreli fonksiyonları click anında tetiklemek için kullanılan arrow function yöntemidir.
+  *Kullanımı:* Tıklanan elemanın kimliğini yakalayıp işleme göndermede.

@@ -1,0 +1,119 @@
+ASENKRON JAVASCRIPT VE API VERİ YÖNETİMİ DERS NOTLARI
+
+=========================================
+SABAH BÖLÜMÜ: CALLBACK VE PROMISE MANTIĞI
+=========================================
+
+1. CALLBACK (GERİ ÇAĞIRIM) FONKSİYONLARI VE ASENKRONLUK
+Bir fonksiyonun başka bir fonksiyona parametre olarak geçilip, o fonksiyon tamamlandıktan sonra çalıştırılması mantığıdır.
+- Senkron Callback : Matematiksel işlemler gibi anında yürütülür (`index.html`).
+- Asenkron Callback: `setTimeout` gibi işlemlerle tetiklenen, belirli bir süre sonra veya ağ isteği tamamlanınca çalışan geri çağırımlar (`index2.html`).
+*Dezavantajı:* Kodlar iç içe girdikçe okunamayacak hale gelir. Bu duruma "Callback Hell" (Callback Cehennemi) denir.
+
+
+2. PROMISE (VAAT) YAPISI NEDİR?
+Asenkron işlemlerin başarıyla tamamlandığını (resolve) veya başarısızlıkla sonuçlandığını (reject) temsil eden JavaScript nesnesidir. 3 durumu vardır:
+- Pending (Beklemede)  : İşlem henüz bitmedi.
+- Fulfilled (Tamamlandı): İşlem başarıyla bitti ve sonuç döndü (`.then()` tetiklenir).
+- Rejected (Reddedildi) : İşlem hata verdi (`.catch()` tetiklenir).
+
+Örnek Promise Tanımı:
+const girisYap = (kullanici) => {
+    return new Promise((resolve, reject) => {
+        if(kullanici === "admin") resolve("Giriş Başarılı");
+        else reject("Hatalı Kullanıcı");
+    });
+};
+
+
+3. PROMISE ZİNCİRLEME (PROMISE CHAINING)
+Ardışık asenkron işlemleri yönetmek için promise yapıları birbirine bağlanır. Bir `.then()` bloğunun döndürdüğü veri bir sonraki `.then()` bloğuna aktarılır:
+kullaniciyiGetir()
+    .then(user => siparisleriGetir(user.id))
+    .then(order => siparisDetayiniGetir(order.id))
+    .then(detail => console.log(detail))
+    .catch(err => console.error(err));
+
+
+=========================================
+ÖĞLEDEN SONRA BÖLÜMÜ: ASYNC/AWAIT VE API İLETİŞİMİ (FETCH / AXIOS)
+=========================================
+
+1. ASYNC / AWAIT SÖZDİZİMİ VE HATA YÖNETİMİ
+Promise zincirlerini senkron kod gibi daha okunaklı yazmamızı sağlayan bir yapıdır.
+- Bir fonksiyonun içinde `await` kullanabilmek için o fonksiyonun başına `async` anahtar kelimesi getirilmelidir.
+- Hata yönetimi klasik `try-catch` blokları ile sağlanır:
+async function siparisSureci() {
+    try {
+        const user = await kullaniciyiGetir();
+        const order = await siparisleriGetir(user.id);
+        console.log(order);
+    } catch (error) {
+        console.error("Hata oluştu:", error);
+    }
+}
+
+
+2. FETCH API İLE GERÇEK VERİ YÖNETİMİ
+Tarayıcıda gömülü olan, ağ üzerinden HTTP istekleri yapmamızı sağlayan modern bir arayüzdür. 
+Gelen yanıtı JSON formatına çevirmek için `response.json()` metodu çağrılır ve bu işlem de asenkron bir promise döner:
+fetch("https://jsonplaceholder.typicode.com/users")
+    .then(res => res.json())
+    .then(data => listele(data));
+
+
+3. AXIOS KÜTÜPHANESİ VE FARK LARI
+HTTP istekleri atmak için kullanılan popüler bir harici kütüphanedir.
+Fetch API'ye göre avantajları:
+- Gelen verileri otomatik olarak JSON formatına dönüştürür (doğrudan `.data` üzerinden erişilir).
+- Hata durumlarında otomatik reject fırlatır (400 veya 500 kodlarında direkt `.catch` bloğuna düşer).
+- İstek iptalleri (AbortController) ve interceptor (istek yakalayıcı) desteği vardır.
+
+
+=========================================
+ÖZET TABLO: HANGİ KAVRAM NE İŞE YARAR?
+=========================================
+
+1. ASENKRON YÖNTEMLER:
+- Callback                : Başka bir fonksiyona argüman olarak iletilen fonksiyon.
+- Promise                 : Asenkron işlemin gelecekteki sonucunu temsil eden nesne.
+- resolve()               : Promise'in başarıyla bittiğini bildiren metot.
+- reject()                : Promise'in başarısız olduğunu ve hata fırlattığını bildiren metot.
+- Async / Await           : Promise yapılarını senkron yazım tarzıyla yazmamızı sağlayan ES8 anahtar kelimeleri.
+
+2. API VE HTTP KAVRAMLARI:
+- Fetch API               : Tarayıcıda gömülü, asenkron ağ isteği atma fonksiyonu.
+- Axios                   : Otomatik JSON dönüşümü yapan popüler harici HTTP istek kütüphanesi.
+- JSON                    : Sunucu ve istemci arasında veri taşımak için kullanılan hafif metin formatı.
+
+=========================================
+TEMEL UYGULAMA VE PRATİK KAZANIMLARI
+=========================================
+
+1. CALLBACK ZİNCİRİ VE MOCK FETCH AŞAMASI:
+- Matematiksel callback işlemleri ve setTimeout ile asenkron ağ gecikmesi simüle edildi (`index.html`, `index2.html`).
+
+2. PROMISE TABANLI DOĞRULAMA VE ZİNCİRLEME:
+- Kullanıcı adı ve şifre kontrolünü asenkron yapan Promise nesnesi tasarlandı (`index3.html`).
+- Kullanıcı -> Sipariş -> Detay sırasını takip eden sipariş detaylandırma zinciri kuruldu (`index4.html`).
+- Sipariş zinciri `async/await` yapısına dönüştürülerek kod sadeleştirildi (`index5.html`).
+
+3. GERÇEK API ENTEGRASYONU VE SEPET YÖNETİMİ:
+- JSONPlaceholder API'sinden kullanıcı listesi çekildi, arama girdisine göre anlık DOM güncellemeleri yapıldı (`index6.html`).
+- FakeStoreAPI üzerinden ürün kataloğu Axios ile çekildi. Arama, ürünü sepete ekleme, sepet miktarını artırma/azaltma ve sepet toplam tutarını hesaplayan tam kapsamlı bir sepet yönetim arayüzü kuruldu (`index7.html`).
+
+=========================================
+PROJEDE KULLANILAN METOT VE API'LERİN AÇIKLAMALARI
+=========================================
+
+- **fetch:** Belirtilen URL'e asenkron HTTP GET isteği gönderir.
+  *Kullanımı:* `https://jsonplaceholder.typicode.com/users` adresinden kullanıcı listesi çekmek için.
+
+- **axios.get:** Axios kütüphanesiyle HTTP GET isteği atar, verileri otomatik `.data` içerisine aktarır.
+  *Kullanımı:* FakeStoreAPI'den ürün listesini çekmek için.
+
+- **setTimeout:** Belirtilen milisaniye kadar asenkron bekleme yapar.
+  *Kullanımı:* Promise ve callback işlemlerinde sunucu yanıt gecikmelerini taklit etmek için.
+
+- **Promise.resolve / Promise.reject:** Promise durumunu tamamlandı veya başarısız olarak işaretler.
+  *Kullanımı:* Giriş doğrulama ekranında girilen değerlerin doğruluğuna göre arayüze yanıt iletmede.
