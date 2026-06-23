@@ -135,3 +135,9 @@ https://soft-ito-wheel-and-write.vercel.app/?role=student
 
 beyaz-ali-ezgi
 evcil hayvan veteriner platformu randevu sistemi
+
+makale yazılacak midium a yüklenecek,
+3- cv hazırlanacak
+4-pi testi
+
+makale ödevi - makale sunumları
