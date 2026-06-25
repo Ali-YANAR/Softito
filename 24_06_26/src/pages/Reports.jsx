@@ -31,14 +31,25 @@ export default function Reports() {
  const handleDownload = (report) => {
   showToast(`${report.title} dosyası indiriliyor...`);
 
-  if (report.url) {
-    const a = document.createElement("a");
-    a.href = report.url;
-    a.download = report.title;
-    a.click();
-  } else {
-    showToast("Dosya bulunamadı.");
-  }
+  const content = `
+AuraCRM - Rapor Belgesi
+========================
+Rapor Adı  : ${report.title}
+Tarih      : ${report.date}
+Boyut      : ${report.size}
+========================
+Bu rapor AuraCRM sistemi tarafından otomatik oluşturulmuştur.
+  `.trim();
+
+  const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = report.title;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 };
 
   const handeExportAll = () => {

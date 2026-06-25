@@ -15,33 +15,37 @@ export default function App() {
   const [currentCategory, setCurrentCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
 
+  //safya ilk açılışında useEffect fectch ile veri çekiliyor.
+
   useEffect(() => {
     fetch("/urunler.json")
-      .then((res) => {
-        if (!res.ok) {
+      .then((res) => { //gelen cevap bakılır
+        if (!res.ok) {// gelen cevap ok değilse hata döner
           throw new Error(`Katalog yüklenemedi. Sunucu hata kodu: ${res.status}`);
         }
-        return res.json();
+        return res.json(); // hata yok ise json nesne olarak döner
+      }) 
+      .then((data) => {//burada hata yoksa dönen değer data olarak geri kullanılır.
+        setProducts(data);//data usestate 'e set edilir. yani atanır.
+        setLoading(false);//jsondan gelen veri yuklendimi ? 
       })
-      .then((data) => {
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
+      .catch((err) => { // jsondan gelen veri de hata varsa bu blok işletilik.
+        setError(err.message); //useState hata ya hatayı ekler
+        setLoading(false);// yuklemeye hata olduğundan dolayı false gönderilir. 
       });
   }, []);
 
+  //burada urunleri gösteren fonksiyon yazılıyor. useMemo kullanıyoruz. 
+  //usememo hızlı işlem yapmak için memo dan veri alır.
   const displayProducts = useMemo(() => {
-    const filtered = currentCategory === "all"
-      ? products
+    const filtered = currentCategory === "all" // kategorilerin hepsini yükleniyor
+      ? products //all ise tüm kategoriler yüklenir. 
       : products.filter((item) => item.kategori === currentCategory);
-
-    return filtered.map((item) => {
-      const sepetUrun = sepet.find((c) => c.id === item.id);
-      const sepetAdet = sepetUrun ? sepetUrun.adet : 0;
-      return {
+      //kategori all değilse tıklanan kategori current kategori olur.
+    return filtered.map((item) => {//urunnun elemanlarının içerisinde dolaşır.
+      const sepetUrun = sepet.find((c) => c.id === item.id);//sepetin içindeki ürünlerdeki id alınıp item ID ie karşılaştırılır. Eşitlenirse sepeturun değişkenine urun atanır.
+      const sepetAdet = sepetUrun ? sepetUrun.adet : 0; // sepette urun bulunursa sepet.urun adeti sepetadet değişkenine atar. yoksada 0 atar.
+      return {//geri urun ve stok miktarı döner
         ...item,
         stok: Math.max(0, item.stok - sepetAdet)
       };
