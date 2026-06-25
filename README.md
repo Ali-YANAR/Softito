@@ -140,4 +140,8 @@ makale yazılacak midium a yüklenecek,
 3- cv hazırlanacak
 4-pi testi
 
-makale ödevi - makale sunumları
+
+##redux kurulumu
+npm i @reduxjs/toolkit react-redux
+
+ 

@@ -47,7 +47,7 @@ export default function Auth() {
               type="radio"
               id="role-admin"
               name="user-role-select"
-              defaultChecked
+              
               className="role-input"
                checked={selectedRole==="Admin"}
               onChange={()=>setSelectedRole("Admin")}
