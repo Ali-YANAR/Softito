@@ -31,7 +31,7 @@ const reportsSlice = createSlice({
         .map((w) => w[0])
         .join("")
         .toUpperCase();
-      const rangeClean = range.replace(" ", " ");
+      const rangeClean = range.replace(" ", "");
       const title = `${titleAbbr}_Raporu_${rangeClean}.${fileExt}`;
       const sizeNum = (1.2 + Math.random() * 3).toFixed(1);
       const size = `${sizeNum} MB`;
@@ -43,6 +43,10 @@ const reportsSlice = createSlice({
         minute: "2-digit",
       });
 
+const content = `AuraCRM - Rapor Belgesi\n========================\nRapor Adı    : ${title}\nRapor Türü   : ${type}\nTarih Aralığı: ${range}\nOluşturulma  : ${dateStr}\n========================\nBu rapor AuraCRM sistemi tarafından otomatik oluşturulmuştur.`;
+
+  const url = `data:text/plain;charset=utf-8,${encodeURIComponent(content)}`;
+
       const nextId =
         state.reportsList.length > 0
           ? Math.max(...state.reportsList.map((r) => r.id)) + 1
@@ -52,7 +56,8 @@ const reportsSlice = createSlice({
         title,
         size,
         date: dateStr,
-        url: "#",
+       // url: "#",
+       url
       });
     },
   },
