@@ -129,4 +129,4 @@ const customerSlice = createSlice({
 })
 
 export const { selectCustomerForEdit, clearSelectedCustomer } = customerSlice.actions
-export default customerSlice.reducer
+ export default customerSlice.reducer

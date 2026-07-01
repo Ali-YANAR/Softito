@@ -1,0 +1,64 @@
+{
+  "customers": [
+    {
+      "id": 1,
+      "name": "Ahmet Yılmaz",
+      "email": "ahmet.yilmaz@company.com",
+      "phone": "+90 (532) 123 45 67",
+      "company": "Yılmaz Yapı Ltd.",
+      "role": "Müşteri",
+      "status": "Aktif",
+      "registrationDate": "2026-01-10",
+      "address": "Büyükdere Cad. No: 123, Şişli, İstanbul",
+      "notes": "Premium müşteri. Düzenli olarak inşaat malzemesi siparişi veriyor."
+    },
+    {
+      "id": 2,
+      "name": "Ayşe Kaya",
+      "email": "ayse.kaya@techsolutions.com",
+      "phone": "+90 (544) 987 65 43",
+      "company": "TechSolutions Yazılım",
+      "role": "Müşteri",
+      "status": "Aktif",
+      "registrationDate": "2026-03-15",
+      "address": "Teknopark Bulvarı A Blok, Pendik, İstanbul",
+      "notes": "SaaS lisans yenilemesi Mart ayında yapılacak."
+    },
+    {
+      "id": 3,
+      "name": "Mehmet Demir",
+      "email": "mehmet@demirloji.com",
+      "phone": "+90 (505) 555 44 33",
+      "company": "Demir Lojistik A.Ş.",
+      "role": "Partner",
+      "status": "Pasif",
+      "registrationDate": "2025-11-20",
+      "address": "Liman Yolu Sok. No: 8, Konak, İzmir",
+      "notes": "Eski taşımacılık partnerimiz, şu an pasif durumda."
+    },
+    {
+      "id": 4,
+      "name": "Zeynep Çelik",
+      "email": "zeynep@celikgrup.org",
+      "phone": "+90 (533) 222 11 00",
+      "company": "Çelik Yatırım Grubu",
+      "role": "Aday",
+      "status": "Beklemede",
+      "registrationDate": "2026-05-02",
+      "address": "Kızılırmak Mah. 1443. Cad. No: 5, Çankaya, Ankara",
+      "notes": "Teklif aşamasında. Yatırım portföyü hakkında görüşmeler devam ediyor."
+    },
+    {
+      "name": "Ali YANAR",
+      "email": "aliyanar@aliyanar.com.tr",
+      "phone": "",
+      "company": "Ali Company",
+      "role": "Müşteri",
+      "status": "Aktif",
+      "registrationDate": "2026-07-01",
+      "address": "İstanbul ",
+      "notes": "İhracat ithalat",
+      "id": 5
+    }
+  ]
+}
